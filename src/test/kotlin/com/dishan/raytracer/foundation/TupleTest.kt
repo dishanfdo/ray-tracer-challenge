@@ -21,15 +21,15 @@ class TupleTest {
 
     @Test
     fun `point() creates tuples with w=1`() {
-        val point = point(4f, -4f, 3f)
+        val point = point(4, -4, 3)
 
-        assert(point.closeEnough(Tuple(4f, -4f, 3f, 1.0f)))
+        assert(point.closeEnough(Tuple(4, -4, 3, 1)))
     }
 
     @Test
     fun `vector() creates tuples with w=0`() {
-        val point = vector(4f, -4f, 3f)
+        val point = vector(4, -4, 3)
 
-        assert(point.closeEnough(Tuple(4f, -4f, 3f, 0.0f)))
+        assert(point.closeEnough(Tuple(4, -4, 3, 0)))
     }
 }
