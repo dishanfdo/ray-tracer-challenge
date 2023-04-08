@@ -24,6 +24,8 @@ class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
                 && w == other.w
     }
 
+    override fun toString(): String = "($x, $y, $z, $w)"
+
     operator fun plus(other: Tuple): Tuple = Tuple(x + other.x, y + other.y, z + other.z, w + other.w)
 
     operator fun minus(other: Tuple): Tuple = Tuple(x - other.x, y - other.y, z - other.z, w - other.w)
