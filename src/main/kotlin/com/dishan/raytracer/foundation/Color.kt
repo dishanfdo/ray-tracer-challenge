@@ -3,6 +3,11 @@ package com.dishan.raytracer.foundation
 import com.dishan.raytracer.util.closeEnough
 
 class Color(val red: Float, val green: Float, val blue: Float) {
+    companion object {
+        val Black = Color(0f, 0f, 0f)
+        val White = Color(1f, 1f, 1f)
+    }
+
     fun closeEnough(other: Color): Boolean {
         return red.closeEnough(other.red)
                 && green.closeEnough(other.green)
