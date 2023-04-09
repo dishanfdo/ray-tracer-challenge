@@ -8,23 +8,29 @@ fun Canvas.toPPM(colorDepth: Int = 255): String {
 
     fun saveValue(value: Float) = (value * colorDepth).coerceIn(0f .. maxColor).roundToInt()
 
-    return buildString {
-        appendLine("P3")
-        appendLine("$width $height")
-        appendLine("$colorDepth")
+    fun buildLines(): List<String> {
+        return buildList {
+            add("P3")
+            add("$width $height")
+            add("$colorDepth")
 
-        for (y in 0 until height) {
-            for (x in 0 until width) {
-                val color = this@toPPM[x, y]
-                val red = saveValue(color.red)
-                val green = saveValue(color.green)
-                val blue = saveValue(color.blue)
-                append("$red $green $blue")
-                if (x != width - 1) {
-                    append(" ")
+            for (y in 0 until height) {
+                val line = buildString {
+                    for (x in 0 until width) {
+                        val color = this@toPPM[x, y]
+                        val red = saveValue(color.red)
+                        val green = saveValue(color.green)
+                        val blue = saveValue(color.blue)
+                        append("$red $green $blue")
+                        if (x != width - 1) {
+                            append(" ")
+                        }
+                    }
                 }
+                add(line)
             }
-            appendLine()
         }
     }
+
+    return buildLines().joinToString(separator = "\n")
 }
