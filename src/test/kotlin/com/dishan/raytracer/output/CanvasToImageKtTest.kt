@@ -51,4 +51,12 @@ class CanvasToImageKtTest {
         assertEquals("255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", ppm[5])
         assertEquals("153 255 204 153 255 204 153 255 204 153 255 204 153", ppm[6])
     }
+
+    @Test
+    fun `PPM files are terminated by a newline character`() {
+        val canvas = Canvas(5, 3)
+
+        val ppm = canvas.toPPM()
+        assertEquals('\n', ppm.last())
+    }
 }

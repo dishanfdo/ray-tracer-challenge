@@ -29,6 +29,7 @@ fun Canvas.toPPM(colorDepth: Int = 255): String {
                 }
                 add(line)
             }
+            add("\n")
         }
     }
 
