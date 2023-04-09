@@ -1,9 +1,8 @@
 package com.dishan.raytracer.samples.projectile
 
-import com.dishan.raytracer.foundation.Tuple
-import com.dishan.raytracer.foundation.normalized
-import com.dishan.raytracer.foundation.point
-import com.dishan.raytracer.foundation.vector
+import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.output.toPPM
+import java.io.File
 
 data class Environment(val gravity: Tuple, val wind: Tuple)
 
@@ -15,17 +14,34 @@ fun tick(env: Environment, proj: Projectile): Projectile {
     return Projectile(position, velocity)
 }
 
-fun main() {
-    // projectile starts one unit above the origin.
-    // velocity is normalized to 1 unit/tick.
-    var p = Projectile(point(0, 1, 0), vector(1, 1, 0).normalized())
-    // gravity -0.1 unit/tick, and wind is -0.01 unit/tick.
-    val env = Environment(vector(0f, -0.1f, 0f), vector(-0.01f, 0f, 0f))
+fun Projectile.drawOn(canvas: Canvas) {
+    val x = position.x.toInt().coerceIn(0 until canvas.width)
+    val y = (canvas.height - position.y.toInt()).coerceIn(0 until canvas.height)
+    canvas[x, y] = Color.White
+}
 
-    var ticks = 0
+fun String.writeToFile(filePath: String) {
+    File(filePath).writeText(this)
+}
+
+fun runSimulation(projectile: Projectile, env: Environment, canvas: Canvas) {
+    var p = projectile
     while (p.position.y > 0) {
-        ticks++
         p = tick(env, p)
-        println("$ticks: $p")
+        p.drawOn(canvas)
     }
+}
+
+fun main() {
+    val start = point(0, 1, 0)
+    val velocity = vector(1f, 1.8f, 0f).normalized() * 11.25f
+    val p = Projectile(start, velocity)
+
+    val gravity = vector(0f, -0.1f, 0f)
+    val wind = vector(-0.01f, 0f, 0f)
+    val env = Environment(gravity, wind)
+
+    val canvas = Canvas(900, 550)
+    runSimulation(p, env, canvas)
+    canvas.toPPM().writeToFile("./output/projectile.ppm")
 }
