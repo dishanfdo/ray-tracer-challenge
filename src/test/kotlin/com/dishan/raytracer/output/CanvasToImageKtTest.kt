@@ -35,4 +35,20 @@ class CanvasToImageKtTest {
         assertEquals("0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", ppm[5])
     }
 
+    @Test
+    fun `Splitting long lines in PPM files`() {
+        val canvas = Canvas(10, 2)
+        for (x in 0 until canvas.width) {
+            for (y in 0 until canvas.height) {
+                canvas[x, y] = Color(1f, 0.8f, 0.6f)
+            }
+        }
+
+        val ppm = canvas.toPPM().lines()
+
+        assertEquals("255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", ppm[3])
+        assertEquals("153 255 204 153 255 204 153 255 204 153 255 204 153", ppm[4])
+        assertEquals("255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", ppm[5])
+        assertEquals("153 255 204 153 255 204 153 255 204 153 255 204 153", ppm[6])
+    }
 }
