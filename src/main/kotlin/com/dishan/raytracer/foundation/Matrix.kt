@@ -1,5 +1,6 @@
 package com.dishan.raytracer.foundation
 
+import com.dishan.raytracer.util.`~!=`
 import com.dishan.raytracer.util.`~==`
 
 open class Matrix(val rows: Int, val cols: Int) {
@@ -32,6 +33,19 @@ open class Matrix(val rows: Int, val cols: Int) {
     }
 
     infix fun `~!=`(other: Matrix): Boolean = !(this `~==` other)
+
+    override fun toString(): String = buildString {
+        for (row in 0 until rows) {
+            append("|")
+            for (col in 0 until cols) {
+                val text = String.format("%.5f", this@Matrix[row, col]).padStart(10)
+                append(text)
+                if(col != cols - 1) append(" ")
+            }
+            append("|")
+            appendLine()
+        }
+    }
 
     operator fun get(row: Int, col: Int): Float = elements[row * cols + col]
 
@@ -166,4 +180,21 @@ fun Matrix4.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
 fun Matrix4.cofactor(row: Int, col: Int): Float {
     val sign = if ((row + col) % 2 == 0) 1 else -1
     return minor(row, col) * sign
+}
+
+fun Matrix4.isInvertible(): Boolean = determinant `~!=` 0f
+
+fun Matrix4.inversed(): Matrix4 {
+    val determinant = determinant
+    if (determinant `~==` 0f) error("Matrix $this is not invertible")
+
+    val inversed = Matrix4()
+    for (row in 0 until rows) {
+        for (col in 0 until cols) {
+            val c = cofactor(row, col)
+            inversed[col, row] = c / determinant
+        }
+    }
+
+    return inversed
 }
