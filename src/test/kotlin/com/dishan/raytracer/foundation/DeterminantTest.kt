@@ -74,4 +74,34 @@ class DeterminantTest {
         assert(a.minor(1, 0) `~==` 25f)
         assert(a.cofactor(1, 0) `~==` -25f)
     }
+
+    @Test
+    fun `Calculating the determinant of a 3x3 matrix`() {
+        val a = Matrix3(
+            1f, 2f, 6f,
+            -5f, 8f, -4f,
+            2f, 6f, 4f,
+        )
+
+        assert(a.cofactor(0, 0) `~==` 56f)
+        assert(a.cofactor(0, 1) `~==` 12f)
+        assert(a.cofactor(0, 2) `~==` -46f)
+        assert(a.determinant `~==` -196f)
+    }
+
+    @Test
+    fun `Calculating the determinant of a 4x4 matrix`() {
+        val a = Matrix4(
+            -2f, -8f, 3f, 5f,
+            -3f, 1f, 7f, 3f,
+            1f, 2f, -9f, 6f,
+            -6f, 7f, 7f, -9f,
+        )
+
+        assert(a.cofactor(0, 0) `~==` 690f)
+        assert(a.cofactor(0, 1) `~==` 447f)
+        assert(a.cofactor(0, 2) `~==` 210f)
+        assert(a.cofactor(0, 3) `~==` 51f)
+        assert(a.determinant `~==` -4071f)
+    }
 }

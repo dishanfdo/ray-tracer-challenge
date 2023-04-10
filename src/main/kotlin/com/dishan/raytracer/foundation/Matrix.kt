@@ -63,6 +63,12 @@ class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
         return tuple(x, y, z, w)
     }
 
+    val determinant: Float
+        get() = this[0, 0] * cofactor(0, 0) +
+                this[0, 1] * cofactor(0, 1) +
+                this[0, 2] * cofactor(0, 2) +
+                this[0, 3] * cofactor(0, 3)
+
     companion object {
         fun create(init: (Int, Int) -> Float) = create(4, 4, init)
 
@@ -86,6 +92,12 @@ class Matrix2(vararg elements: Float) : Matrix(2, 2, *elements) {
 }
 
 class Matrix3(vararg elements: Float) : Matrix(3, 3, *elements) {
+    val determinant: Float
+        get() = this[0, 0] * cofactor(0, 0) +
+                this[0, 1] * cofactor(0, 1) +
+                this[0, 2] * cofactor(0, 2)
+
+
     companion object {
         fun create(init: (Int, Int) -> Float) = create(3, 3, init)
     }
@@ -145,6 +157,13 @@ fun Matrix4.transposed(): Matrix4 {
 fun Matrix3.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
 
 fun Matrix3.cofactor(row: Int, col: Int): Float {
+    val sign = if ((row + col) % 2 == 0) 1 else -1
+    return minor(row, col) * sign
+}
+
+fun Matrix4.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
+
+fun Matrix4.cofactor(row: Int, col: Int): Float {
     val sign = if ((row + col) % 2 == 0) 1 else -1
     return minor(row, col) * sign
 }
