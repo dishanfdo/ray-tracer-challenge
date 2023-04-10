@@ -87,3 +87,13 @@ class Matrix3(vararg elements: Float) : Matrix(3, 3, *elements) {
         fun create(init: (Int, Int) -> Float) = create(3, 3, init)
     }
 }
+
+fun Matrix4.transposed(): Matrix4 {
+    val transposed = Matrix4()
+    for (row in 0 until  rows) {
+        for (col in 0 until cols) {
+            transposed[row, col] = this[col, row]
+        }
+    }
+    return transposed
+}

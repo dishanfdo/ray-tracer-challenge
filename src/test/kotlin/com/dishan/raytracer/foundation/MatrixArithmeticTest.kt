@@ -62,4 +62,23 @@ class MatrixArithmeticTest {
         val identity = Matrix4.identity
         assert((identity * a) `~==` a)
     }
+    @Test
+    fun `Transposing a matrix`() {
+        val a = Matrix4(
+            0f, 9f, 3f, 0f,
+            9f, 8f, 0f, 8f,
+            1f, 8f, 5f, 3f,
+            0f, 0f, 5f, 8f,
+        )
+
+        val expected = Matrix4(
+            0f, 9f, 1f, 0f,
+            9f, 8f, 8f, 0f,
+            3f, 0f, 5f, 5f,
+            0f, 8f, 3f, 8f,
+        )
+
+        assert(a.transposed() `~==` expected)
+    }
+
 }
