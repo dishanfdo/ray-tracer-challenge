@@ -77,6 +77,8 @@ class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
 }
 
 class Matrix2(vararg elements: Float) : Matrix(2, 2, *elements) {
+    val determinant: Float = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
+
     companion object {
         fun create(init: (Int, Int) -> Float) = create(2, 2, init)
     }
@@ -86,14 +88,55 @@ class Matrix3(vararg elements: Float) : Matrix(3, 3, *elements) {
     companion object {
         fun create(init: (Int, Int) -> Float) = create(3, 3, init)
     }
+
 }
+
+fun Matrix3.submatrix(row: Int, col: Int): Matrix2 {
+    val submatrix = Matrix2()
+
+    var i = 0
+    var j = 0
+    for (x in 0 until rows) {
+        if (x == row) continue
+        for (y in 0 until cols) {
+            if (y == col) continue
+            submatrix[i, j] = this[x, y]
+            j++
+        }
+        i++
+        j = 0
+    }
+
+    return submatrix
+}
+
+fun Matrix4.submatrix(row: Int, col: Int): Matrix3 {
+    val submatrix = Matrix3()
+
+    var i = 0
+    var j = 0
+    for (x in 0 until rows) {
+        if (x == row) continue
+        for (y in 0 until cols) {
+            if (y == col) continue
+            submatrix[i, j] = this[x, y]
+            j++
+        }
+        i++
+        j = 0
+    }
+
+    return submatrix
+}
+
 
 fun Matrix4.transposed(): Matrix4 {
     val transposed = Matrix4()
-    for (row in 0 until  rows) {
+    for (row in 0 until rows) {
         for (col in 0 until cols) {
             transposed[row, col] = this[col, row]
         }
     }
     return transposed
 }
+
