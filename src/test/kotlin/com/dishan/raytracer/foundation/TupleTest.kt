@@ -23,13 +23,13 @@ class TupleTest {
     fun `point() creates tuples with w=1`() {
         val point = point(4, -4, 3)
 
-        assert(point.closeEnough(Tuple(4, -4, 3, 1)))
+        assert(point `~==` Tuple(4, -4, 3, 1))
     }
 
     @Test
     fun `vector() creates tuples with w=0`() {
         val point = vector(4, -4, 3)
 
-        assert(point.closeEnough(Tuple(4, -4, 3, 0)))
+        assert(point `~==` Tuple(4, -4, 3, 0))
     }
 }

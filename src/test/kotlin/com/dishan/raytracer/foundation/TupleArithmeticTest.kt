@@ -9,7 +9,7 @@ class TupleArithmeticTest {
         val a2 = Tuple(-2, 3, 1, 0)
         val result = Tuple(1, 1, 6, 1)
 
-        assert((a1 + a2).closeEnough(result))
+        assert((a1 + a2) `~==` result)
     }
 
     @Test
@@ -17,7 +17,7 @@ class TupleArithmeticTest {
         val p1 = point(3, -2, 5)
         val p2 = point(-2, 3, 1)
 
-        assert((p1 - p2).closeEnough(vector(5, -5, 4)))
+        assert((p1 - p2) `~==` vector(5, -5, 4))
     }
 
     @Test
@@ -25,7 +25,7 @@ class TupleArithmeticTest {
         val p = point(3, 2, 1)
         val v = vector(5, 6, 7)
 
-        assert((p - v).closeEnough(point(-2, -4, -6)))
+        assert((p - v) `~==` point(-2, -4, -6))
     }
 
     @Test
@@ -33,7 +33,7 @@ class TupleArithmeticTest {
         val v1 = vector(3, 2, 1)
         val v2 = vector(5, 6, 7)
 
-        assert((v1 - v2).closeEnough(vector(-2, -4, -6)))
+        assert((v1 - v2) `~==` vector(-2, -4, -6))
     }
 
     @Test
@@ -41,30 +41,30 @@ class TupleArithmeticTest {
         val zero = vector(0, 0, 0)
         val v = vector(1, -2, 3)
 
-        assert((zero - v).closeEnough(vector(-1, 2, -3)))
+        assert((zero - v) `~==` vector(-1, 2, -3))
     }
 
     @Test
     fun `negating a tuple`() {
         val a = tuple(1, -2, 3, -4)
-        assert((-a).closeEnough(tuple(-1, 2, -3, 4)))
+        assert((-a) `~==` tuple(-1, 2, -3, 4))
     }
 
     @Test
     fun `multiplying a tuple by a scalar`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a * 3.5f).closeEnough(tuple(3.5f, -7f, 10.5f, -14f)))
+        assert((a * 3.5f) `~==` tuple(3.5f, -7f, 10.5f, -14f))
     }
 
     @Test
     fun `multiplying a tuple by a fraction`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a * 0.5f).closeEnough(tuple(0.5f, -1f, 1.5f, -2f)))
+        assert((a * 0.5f) `~==` tuple(0.5f, -1f, 1.5f, -2f))
     }
 
     @Test
     fun `dividing a tuple by a scalar`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a / 2f).closeEnough(tuple(0.5f, -1f, 1.5f, -2f)))
+        assert((a / 2f) `~==` tuple(0.5f, -1f, 1.5f, -2f))
     }
 }

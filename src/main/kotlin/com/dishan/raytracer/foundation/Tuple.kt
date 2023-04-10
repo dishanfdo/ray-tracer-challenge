@@ -1,7 +1,7 @@
 package com.dishan.raytracer.foundation
 
 import com.dishan.raytracer.foundation.Type.*
-import com.dishan.raytracer.util.closeEnough
+import com.dishan.raytracer.util.`~==`
 
 enum class Type {
     Point, Vector, Other
@@ -17,10 +17,10 @@ class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
         else -> Other
     }
 
-    fun closeEnough(other: Tuple): Boolean {
-        return x.closeEnough(other.x)
-                && y.closeEnough(other.y)
-                && z.closeEnough(other.z)
+    infix fun `~==`(other: Tuple): Boolean {
+        return x `~==` other.x
+                && y `~==` other.y
+                && z `~==` other.z
                 && w == other.w
     }
 

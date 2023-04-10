@@ -1,6 +1,6 @@
 package com.dishan.raytracer.foundation
 
-import com.dishan.raytracer.util.closeEnough
+import com.dishan.raytracer.util.`~==`
 
 class Color(val red: Float, val green: Float, val blue: Float) {
     companion object {
@@ -9,9 +9,9 @@ class Color(val red: Float, val green: Float, val blue: Float) {
     }
 
     fun closeEnough(other: Color): Boolean {
-        return red.closeEnough(other.red)
-                && green.closeEnough(other.green)
-                && blue.closeEnough(other.blue)
+        return red `~==` other.red
+                && green `~==` other.green
+                && blue `~==` other.blue
     }
 
     operator fun plus(other: Color): Color {
