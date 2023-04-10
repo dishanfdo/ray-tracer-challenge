@@ -26,5 +26,32 @@ class TransformationsKtTest {
         assert(transform * v `~==` v)
     }
 
+    @Test
+    fun `A scaling matrix applied to a point`() {
+        val transform = scaling(2, 3, 4)
+        val p = point(-4, 6, 8)
+        assert(transform * p `~==` point(-8, 18, 32))
+    }
 
+    @Test
+    fun `A scaling matrix applied to a vector`() {
+        val transform = scaling(2, 3, 4)
+        val v = vector(-4, 6, 8)
+        assert(transform * v `~==` vector(-8, 18, 32))
+    }
+
+    @Test
+    fun `Multiplying by the inverse of a scaling matrix`() {
+        val transform = scaling(2, 3, 4)
+        val inv = transform.inversed()
+        val v = vector(-4, 6, 8)
+        assert(inv * v `~==` vector(-2, 2, 2))
+    }
+
+    @Test
+    fun `Reflection is scaling by a negative value`() {
+        val transform = scaling(-1, 1, 1)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(-2, 3, 4))
+    }
 }
