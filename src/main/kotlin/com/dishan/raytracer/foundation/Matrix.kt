@@ -143,3 +143,8 @@ fun Matrix4.transposed(): Matrix4 {
 
 
 fun Matrix3.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
+
+fun Matrix3.cofactor(row: Int, col: Int): Float {
+    val sign = if ((row + col) % 2 == 0) 1 else -1
+    return minor(row, col) * sign
+}

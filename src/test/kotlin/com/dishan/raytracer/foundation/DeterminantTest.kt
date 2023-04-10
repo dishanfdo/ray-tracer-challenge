@@ -52,12 +52,26 @@ class DeterminantTest {
     fun `Calculating a minor of a 3x3 matrix`() {
         val a = Matrix3(
             -3f, 5f, 0f,
-            2f, -1f, 7f,
+            2f, -1f, -7f,
             6f, -1f, 5f,
         )
 
         val b = a.submatrix(1, 0)
         assert(b.determinant `~==` 25f)
         assert(a.minor(1, 0) `~==` 25f)
+    }
+
+    @Test
+    fun `Calculating a cofactor of a 3x3 matrix`() {
+        val a = Matrix3(
+            -3f, 5f, 0f,
+            2f, -1f, -7f,
+            6f, -1f, 5f,
+        )
+
+        assert(a.minor(0, 0) `~==` -12f)
+        assert(a.cofactor(0, 0) `~==` -12f)
+        assert(a.minor(1, 0) `~==` 25f)
+        assert(a.cofactor(1, 0) `~==` -25f)
     }
 }
