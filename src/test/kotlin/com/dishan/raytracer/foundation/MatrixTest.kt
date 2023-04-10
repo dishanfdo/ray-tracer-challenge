@@ -58,4 +58,54 @@ class MatrixTest {
         assertEquals(-2f, matrix[1, 1])
         assertEquals(1f, matrix[1, 0])
     }
+
+    @Test
+    fun `Matrix equality with identical matrices`() {
+        val a = Matrix4.create { row, col ->
+            when (row to col) {
+                0 to 0 -> 1f 0 to 1 -> 2f 0 to 2 -> 3f 0 to 3 -> 4f
+                1 to 0 -> 5f 1 to 1 -> 6f 1 to 2 -> 7f 1 to 3 -> 8f
+                2 to 0 -> 9f 2 to 1 -> 8f 2 to 2 -> 7f 2 to 3 -> 6f
+                3 to 0 -> 5f 3 to 1 -> 4f 3 to 2 -> 3f 3 to 3 -> 2f
+                else -> error("Invalid element index: ($row, $col)")
+            }
+        }
+
+        val b = Matrix4.create { row, col ->
+            when (row to col) {
+                0 to 0 -> 1f 0 to 1 -> 2f 0 to 2 -> 3f 0 to 3 -> 4f
+                1 to 0 -> 5f 1 to 1 -> 6f 1 to 2 -> 7f 1 to 3 -> 8f
+                2 to 0 -> 9f 2 to 1 -> 8f 2 to 2 -> 7f 2 to 3 -> 6f
+                3 to 0 -> 5f 3 to 1 -> 4f 3 to 2 -> 3f 3 to 3 -> 2f
+                else -> error("Invalid element index: ($row, $col)")
+            }
+        }
+
+        assert(a `~==` b)
+    }
+
+    @Test
+    fun `Matrix equality with different matrices`() {
+        val a = Matrix4.create { row, col ->
+            when (row to col) {
+                0 to 0 -> 1f 0 to 1 -> 2f 0 to 2 -> 3f 0 to 3 -> 4f
+                1 to 0 -> 5f 1 to 1 -> 6f 1 to 2 -> 7f 1 to 3 -> 8f
+                2 to 0 -> 9f 2 to 1 -> 8f 2 to 2 -> 7f 2 to 3 -> 6f
+                3 to 0 -> 5f 3 to 1 -> 4f 3 to 2 -> 3f 3 to 3 -> 2f
+                else -> error("Invalid element index: ($row, $col)")
+            }
+        }
+
+        val b = Matrix4.create { row, col ->
+            when (row to col) {
+                0 to 0 -> 2f 0 to 1 -> 3f 0 to 2 -> 4f 0 to 3 -> 5f
+                1 to 0 -> 6f 1 to 1 -> 7f 1 to 2 -> 8f 1 to 3 -> 9f
+                2 to 0 -> 8f 2 to 1 -> 7f 2 to 2 -> 6f 2 to 3 -> 5f
+                3 to 0 -> 4f 3 to 1 -> 3f 3 to 2 -> 2f 3 to 3 -> 1f
+                else -> error("Invalid element index: ($row, $col)")
+            }
+        }
+
+        assert(a `~!=` b)
+    }
 }

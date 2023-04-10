@@ -1,5 +1,7 @@
 package com.dishan.raytracer.foundation
 
+import com.dishan.raytracer.util.closeEnough
+
 open class Matrix(val rows: Int, val cols: Int) {
 
     companion object {
@@ -15,7 +17,15 @@ open class Matrix(val rows: Int, val cols: Int) {
         }
     }
 
-    private val elements = FloatArray(16)
+    private val elements = FloatArray(rows * cols)
+
+    infix fun `~==`(other: Matrix): Boolean {
+        return this.rows == other.rows
+                && this.cols == other.cols
+                && (this.elements zip other.elements).all { (a, b) -> a.closeEnough(b) }
+    }
+
+    infix fun `~!=`(other: Matrix): Boolean =  !(this `~==` other)
 
     operator fun get(row: Int, col: Int): Float = elements[row * cols + col]
 
