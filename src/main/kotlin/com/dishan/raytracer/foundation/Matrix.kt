@@ -59,12 +59,20 @@ class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
         val x = this[0, 0] * other.x + this[0, 1] * other.y + this[0, 2] * other.z + this[0, 3] * other.w
         val y = this[1, 0] * other.x + this[1, 1] * other.y + this[1, 2] * other.z + this[1, 3] * other.w
         val z = this[2, 0] * other.x + this[2, 1] * other.y + this[2, 2] * other.z + this[2, 3] * other.w
-        val w = this[3, 0] * other.x + this[3, 1] * other.y + this[3, 2] * other.z + this[2, 3] * other.w
+        val w = this[3, 0] * other.x + this[3, 1] * other.y + this[3, 2] * other.z + this[3, 3] * other.w
         return tuple(x, y, z, w)
     }
 
     companion object {
         fun create(init: (Int, Int) -> Float) = create(4, 4, init)
+
+        val identity: Matrix4
+            get() = Matrix4(
+                1f, 0f, 0f, 0f,
+                0f, 1f, 0f, 0f,
+                0f, 0f, 1f, 0f,
+                0f, 0f, 0f, 1f,
+            )
     }
 }
 

@@ -40,6 +40,26 @@ class MatrixArithmeticTest {
         )
 
         val b = tuple(1, 2, 3, 1)
-        assert((a * b).`~==`(tuple(18, 24, 33, 1)))
+        assert((a * b) `~==` tuple(18, 24, 33, 1))
+    }
+
+    @Test
+    fun `Multiplying a matrix by the identity matrix`() {
+        val a = Matrix4(
+            0f, 1f, 2f, 4f,
+            1f, 2f, 4f, 8f,
+            2f, 4f, 8f, 16f,
+            4f, 8f, 16f, 32f,
+        )
+
+        val identity = Matrix4.identity
+        assert((a * identity) `~==` a)
+    }
+
+    @Test
+    fun `Multiplying the identity matrix by a tuple`() {
+        val a = tuple(1, 2, 3, 4)
+        val identity = Matrix4.identity
+        assert((identity * a) `~==` a)
     }
 }
