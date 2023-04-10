@@ -77,7 +77,8 @@ class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
 }
 
 class Matrix2(vararg elements: Float) : Matrix(2, 2, *elements) {
-    val determinant: Float = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
+    val determinant: Float
+        get() = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
 
     companion object {
         fun create(init: (Int, Int) -> Float) = create(2, 2, init)
@@ -140,3 +141,5 @@ fun Matrix4.transposed(): Matrix4 {
     return transposed
 }
 
+
+fun Matrix3.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
