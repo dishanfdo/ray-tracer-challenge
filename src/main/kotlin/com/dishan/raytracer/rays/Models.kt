@@ -4,4 +4,6 @@ interface Object
 
 class Intersection(val t: Float, val body: Object)
 
-fun intersections(vararg intersection: Intersection): List<Intersection> = listOf(*intersection)
+typealias Intersections = List<Intersection>
+
+fun intersections(vararg intersection: Intersection): Intersections = listOf(*intersection)

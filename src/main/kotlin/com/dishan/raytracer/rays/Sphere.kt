@@ -12,7 +12,7 @@ class Sphere private constructor(val id: Int) : Object {
     constructor() : this(nextId++)
 }
 
-fun Sphere.intersect(ray: Ray): List<Intersection> {
+fun Sphere.intersect(ray: Ray): Intersections {
     val sphereToRay = ray.origin - point(0, 0, 0)
 
     val a = ray.direction dot ray.direction
