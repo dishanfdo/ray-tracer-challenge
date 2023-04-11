@@ -4,7 +4,7 @@ import com.dishan.raytracer.foundation.dot
 import com.dishan.raytracer.foundation.point
 import kotlin.math.sqrt
 
-class Sphere private constructor(val id: Int) {
+class Sphere private constructor(val id: Int) : Object {
     companion object {
         private var nextId = 1
     }
