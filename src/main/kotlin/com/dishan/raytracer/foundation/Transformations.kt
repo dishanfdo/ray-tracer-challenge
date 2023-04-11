@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.dishan.raytracer.foundation
 
 import kotlin.math.cos
@@ -69,3 +71,26 @@ fun shearing(xy: Float = 0f, xz: Float = 0f, yx: Float = 0f, yz: Float = 0f, zx:
         this[2, 1] = zy
     }
 }
+
+fun identity() = Matrix4.identity
+fun Matrix4.translate(x: Int = 0, y: Int = 0, z: Int = 0): Matrix4 = translation(x, y, z) * this
+fun Matrix4.translate(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 = translation(x, y, z) * this
+
+fun Matrix4.scale(x: Int = 0, y: Int = 0, z: Int = 0): Matrix4 = scaling(x, y, z) * this
+fun Matrix4.scale(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 = scaling(x, y, z) * this
+
+fun Matrix4.rotateX(angle: Double): Matrix4 = rotationX(angle) * this
+fun Matrix4.rotateY(angle: Double): Matrix4 = rotationY(angle) * this
+fun Matrix4.rotateZ(angle: Double): Matrix4 = rotationZ(angle) * this
+
+fun Matrix4.shear(xy: Int = 0, xz: Int = 0, yx: Int = 0, yz: Int = 0, zx: Int = 0, zy: Int = 0): Matrix4 =
+    shearing(xy, xz, yx, yz, zx, zy) * this
+
+fun Matrix4.shear(
+    xy: Float = 0f,
+    xz: Float = 0f,
+    yx: Float = 0f,
+    yz: Float = 0f,
+    zx: Float = 0f,
+    zy: Float = 0f
+): Matrix4 = shearing(xy, xz, yx, yz, zx, zy) * this
