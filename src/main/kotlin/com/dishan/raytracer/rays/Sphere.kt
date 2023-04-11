@@ -12,7 +12,7 @@ class Sphere private constructor(val id: Int) : Object {
     constructor() : this(nextId++)
 }
 
-fun Sphere.intersect(ray: Ray): List<Float> {
+fun Sphere.intersect(ray: Ray): List<Intersection> {
     val sphereToRay = ray.origin - point(0, 0, 0)
 
     val a = ray.direction dot ray.direction
@@ -27,5 +27,7 @@ fun Sphere.intersect(ray: Ray): List<Float> {
     val v = sqrt(discriminant)
     val t1 = (-b - v) / (2 * a)
     val t2 = (-b + v) / (2 * a)
-    return listOf(t1, t2)
+    val i1 = Intersection(t1, this)
+    val i2 = Intersection(t2, this)
+    return listOf(i1, i2)
 }

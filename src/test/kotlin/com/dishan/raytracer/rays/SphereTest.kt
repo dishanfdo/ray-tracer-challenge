@@ -15,8 +15,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0] `~==` 4.0f)
-        assert(xs[1] `~==` 6.0f)
+        assert(xs[0].t `~==` 4.0f)
+        assert(xs[1].t `~==` 6.0f)
     }
 
     @Test
@@ -25,8 +25,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0] `~==` 5.0f)
-        assert(xs[1] `~==` 5.0f)
+        assert(xs[0].t `~==` 5.0f)
+        assert(xs[1].t `~==` 5.0f)
     }
 
     @Test
@@ -43,8 +43,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0] `~==` -1.0f)
-        assert(xs[1] `~==` 1.0f)
+        assert(xs[0].t `~==` -1.0f)
+        assert(xs[1].t `~==` 1.0f)
     }
 
     @Test
@@ -53,7 +53,17 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0] `~==` -6.0f)
-        assert(xs[1] `~==` -4.0f)
+        assert(xs[0].t `~==` -6.0f)
+        assert(xs[1].t `~==` -4.0f)
+    }
+
+    @Test
+    fun `Intersect sets the object on the intersection`() {
+        val ray = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val sphere = Sphere()
+        val xs = sphere.intersect(ray)
+        assert(xs.size == 2)
+        assert(xs[0].body == sphere)
+        assert(xs[1].body == sphere)
     }
 }
