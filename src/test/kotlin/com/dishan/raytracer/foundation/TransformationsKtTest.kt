@@ -91,4 +91,46 @@ class TransformationsKtTest {
         assert(halfQuarter * p `~==` point(-sqrt(2f)/2, sqrt(2f)/2, 0f))
         assert(fullQuarter * p `~==` point(-1, 0, 0))
     }
+
+    @Test
+    fun `A shearing transformation moves x in proportion to y`() {
+        val transform = shearing(1, 0, 0, 0, 0, 0)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(5, 3, 4))
+    }
+
+    @Test
+    fun `A shearing transformation moves x in proportion to z`() {
+        val transform = shearing(0, 1, 0, 0, 0, 0)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(6, 3, 4))
+    }
+
+    @Test
+    fun `A shearing transformation moves y in proportion to x`() {
+        val transform = shearing(0, 0, 1, 0, 0, 0)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(2, 5, 4))
+    }
+
+    @Test
+    fun `A shearing transformation moves y in proportion to z`() {
+        val transform = shearing(0, 0, 0, 1, 0, 0)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(2, 7, 4))
+    }
+
+    @Test
+    fun `A shearing transformation moves z in proportion to x`() {
+        val transform = shearing(0, 0, 0, 0, 1, 0)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(2, 3, 6))
+    }
+
+    @Test
+    fun `A shearing transformation moves z in proportion to y`() {
+        val transform = shearing(0, 0, 0, 0, 0, 1)
+        val p = point(2, 3, 4)
+        assert(transform * p `~==` point(2, 3, 7))
+    }
 }

@@ -55,3 +55,17 @@ fun rotationZ(angle: Double): Matrix4 {
         this[0, 1] = -sin
     }
 }
+
+fun shearing(xy: Int = 0, xz: Int = 0, yx: Int = 0, yz: Int = 0, zx: Int = 0, zy: Int = 0): Matrix4 =
+    shearing(xy.toFloat(), xz.toFloat(), yx.toFloat(), yz.toFloat(), zx.toFloat(), zy.toFloat())
+
+fun shearing(xy: Float = 0f, xz: Float = 0f, yx: Float = 0f, yz: Float = 0f, zx: Float = 0f, zy: Float = 0f): Matrix4 {
+    return Matrix4.identity.apply {
+        this[0, 1] = xy
+        this[0, 2] = xz
+        this[1, 0] = yx
+        this[1, 2] = yz
+        this[2, 0] = zx
+        this[2, 1] = zy
+    }
+}
