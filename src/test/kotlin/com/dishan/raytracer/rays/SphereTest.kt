@@ -1,7 +1,6 @@
 package com.dishan.raytracer.rays
 
-import com.dishan.raytracer.foundation.point
-import com.dishan.raytracer.foundation.vector
+import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 
@@ -65,5 +64,42 @@ class SphereTest {
         assert(xs.size == 2)
         assert(xs[0].body == sphere)
         assert(xs[1].body == sphere)
+    }
+
+    @Test
+    fun `A sphere's default transformation`() {
+        val sphere = Sphere()
+        assert(sphere.transform `~==` Matrix4.identity)
+    }
+
+    @Test
+    fun `Changing a sphere's transformation`() {
+        val s = Sphere()
+        val t = translation(2, 3, 4)
+        s.transform = t
+
+        assert(s.transform `~==` t)
+    }
+
+    @Test
+    fun `Intersecting a scaled sphere with a ray`() {
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val s = Sphere()
+        s.transform = scaling(2, 2, 2)
+
+        val xs = s.intersect(r)
+        assert(xs.size == 2)
+        assert(xs[0].t `~==` 3.0f)
+        assert(xs[1].t `~==` 7.0f)
+    }
+
+    @Test
+    fun `Intersecting a translated sphere with a ray`() {
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val s = Sphere()
+        s.transform = translation(5, 0, 0)
+
+        val xs = s.intersect(r)
+        assert(xs.isEmpty())
     }
 }

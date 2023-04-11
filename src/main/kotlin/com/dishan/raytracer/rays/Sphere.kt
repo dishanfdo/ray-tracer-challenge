@@ -1,6 +1,8 @@
 package com.dishan.raytracer.rays
 
+import com.dishan.raytracer.foundation.Matrix4
 import com.dishan.raytracer.foundation.dot
+import com.dishan.raytracer.foundation.inversed
 import com.dishan.raytracer.foundation.point
 import kotlin.math.sqrt
 
@@ -10,13 +12,17 @@ class Sphere private constructor(val id: Int) : Object {
     }
 
     constructor() : this(nextId++)
+
+    var transform: Matrix4 = Matrix4.identity
 }
 
 fun Sphere.intersect(ray: Ray): Intersections {
-    val sphereToRay = ray.origin - point(0, 0, 0)
+    val transformedRay = ray.transformed(this.transform.inversed())
 
-    val a = ray.direction dot ray.direction
-    val b = 2 * (ray.direction dot sphereToRay)
+    val sphereToRay = transformedRay.origin - point(0, 0, 0)
+
+    val a = transformedRay.direction dot transformedRay.direction
+    val b = 2 * (transformedRay.direction dot sphereToRay)
     val c = (sphereToRay dot sphereToRay) - 1
 
     val discriminant = b * b - 4 * a * c
