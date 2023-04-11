@@ -33,3 +33,25 @@ fun rotationX(angle: Double): Matrix4 {
         this[1, 2] = -sin
     }
 }
+
+fun rotationY(angle: Double): Matrix4 {
+    return Matrix4.identity.apply {
+        val cos = cos(angle).toFloat()
+        val sin = sin(angle).toFloat()
+        this[0, 0] = cos
+        this[2, 2] = cos
+        this[2, 0] = -sin
+        this[0, 2] = sin
+    }
+}
+
+fun rotationZ(angle: Double): Matrix4 {
+    return Matrix4.identity.apply {
+        val cos = cos(angle).toFloat()
+        val sin = sin(angle).toFloat()
+        this[0, 0] = cos
+        this[1, 1] = cos
+        this[1, 0] = sin
+        this[0, 1] = -sin
+    }
+}

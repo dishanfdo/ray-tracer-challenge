@@ -73,4 +73,22 @@ class TransformationsKtTest {
         val inv = halfQuarter.inversed()
         assert(inv * p `~==` point(0f, sqrt(2f)/2, -sqrt(2f)/2))
     }
+
+    @Test
+    fun `Rotating a point around the y axis`() {
+        val p = point(0, 0, 1)
+        val halfQuarter = rotationY(PI / 4)
+        val fullQuarter = rotationY(PI / 2)
+        assert(halfQuarter * p `~==` point(sqrt(2f)/2, 0f, sqrt(2f)/2))
+        assert(fullQuarter * p `~==` point(1, 0, 0))
+    }
+
+    @Test
+    fun `Rotating a point around the z axis`() {
+        val p = point(0, 1, 0)
+        val halfQuarter = rotationZ(PI / 4)
+        val fullQuarter = rotationZ(PI / 2)
+        assert(halfQuarter * p `~==` point(-sqrt(2f)/2, sqrt(2f)/2, 0f))
+        assert(fullQuarter * p `~==` point(-1, 0, 0))
+    }
 }
