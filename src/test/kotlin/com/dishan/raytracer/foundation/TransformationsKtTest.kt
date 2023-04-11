@@ -1,6 +1,8 @@
 package com.dishan.raytracer.foundation
 
 import org.junit.jupiter.api.Test
+import kotlin.math.PI
+import kotlin.math.sqrt
 
 class TransformationsKtTest {
 
@@ -53,5 +55,22 @@ class TransformationsKtTest {
         val transform = scaling(-1, 1, 1)
         val p = point(2, 3, 4)
         assert(transform * p `~==` point(-2, 3, 4))
+    }
+
+    @Test
+    fun `Rotating a point around the x axis`() {
+        val p = point(0, 1, 0)
+        val halfQuarter = rotationX(PI / 4)
+        val fullQuarter = rotationX(PI / 2)
+        assert(halfQuarter * p `~==` point(0f, sqrt(2f)/2, sqrt(2f)/2))
+        assert(fullQuarter * p `~==` point(0, 0, 1))
+    }
+
+    @Test
+    fun `The inverse of an x-rotation rotates in the opposite direction`() {
+        val p = point(0, 1, 0)
+        val halfQuarter = rotationX(PI / 4)
+        val inv = halfQuarter.inversed()
+        assert(inv * p `~==` point(0f, sqrt(2f)/2, -sqrt(2f)/2))
     }
 }
