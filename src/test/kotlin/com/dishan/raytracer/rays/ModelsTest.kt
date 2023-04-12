@@ -1,5 +1,8 @@
 package com.dishan.raytracer.rays
 
+import com.dishan.raytracer.foundation.point
+import com.dishan.raytracer.foundation.vector
+import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 import kotlin.test.assertNull
 
@@ -63,5 +66,45 @@ class ModelsTest {
         val xs = intersections(i1, i2, i3, i4)
 
         assert(xs.hit() == i4)
+    }
+
+    @Test
+    fun `Precomputing the state of an intersection`() {
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val shape = Sphere()
+        val i = Intersection(4f, shape)
+
+        val comps = i.prepareComputation(r)
+
+        assert(comps.t `~==` i.t)
+        assert(comps.point `~==` point(0, 0, -1))
+        assert(comps.eyev `~==` vector(0, 0, -1))
+        assert(comps.normalv `~==` vector(0, 0, -1))
+    }
+
+    @Test
+    fun `The hit, when an intersection occurs on the outside`() {
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val shape = Sphere()
+        val i = Intersection(4f, shape)
+
+        val comps = i.prepareComputation(r)
+
+        assert(!comps.inside)
+    }
+
+    @Test
+    fun `The hit, when an intersection occurs on the inside`() {
+        val r = Ray(point(0, 0, 0), vector(0, 0, 1))
+        val shape = Sphere()
+        val i = Intersection(1f, shape)
+
+        val comps = i.prepareComputation(r)
+
+        assert(comps.point `~==` point(0, 0, 1))
+        assert(comps.eyev `~==` vector(0, 0, -1))
+        assert(comps.inside)
+        // normal would have been (0, 0, 1), but is inverted!
+        assert(comps.normalv `~==` vector(0, 0, -1))
     }
 }
