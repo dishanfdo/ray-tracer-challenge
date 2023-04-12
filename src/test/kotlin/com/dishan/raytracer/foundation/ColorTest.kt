@@ -16,7 +16,7 @@ class ColorTest {
         val c1 = Color(0.9f, 0.6f, 0.75f)
         val c2 = Color(0.7f, 0.1f, 0.25f)
 
-        assert((c1 + c2).closeEnough(Color(1.6f, 0.7f, 1.0f)))
+        assert((c1 + c2).`~==`(Color(1.6f, 0.7f, 1.0f)))
     }
 
     @Test
@@ -24,14 +24,14 @@ class ColorTest {
         val c1 = Color(0.9f, 0.6f, 0.75f)
         val c2 = Color(0.7f, 0.1f, 0.25f)
 
-        assert((c1 - c2).closeEnough(Color(0.2f, 0.5f, 0.5f)))
+        assert((c1 - c2).`~==`(Color(0.2f, 0.5f, 0.5f)))
     }
 
     @Test
     fun `Multiplying a color by a scalar`() {
         val c = Color(0.2f, 0.3f, 0.4f)
 
-        assert((c * 2f).closeEnough(Color(0.4f, 0.6f, 0.8f)))
+        assert((c * 2f).`~==`(Color(0.4f, 0.6f, 0.8f)))
     }
 
     @Test
@@ -39,6 +39,6 @@ class ColorTest {
         val c1 = Color(1f, 0.2f, 0.4f)
         val c2 = Color(0.9f, 1f, 0.1f)
 
-        assert((c1 * c2).closeEnough(Color(0.9f, 0.2f, 0.04f)))
+        assert((c1 * c2).`~==`(Color(0.9f, 0.2f, 0.04f)))
     }
 }

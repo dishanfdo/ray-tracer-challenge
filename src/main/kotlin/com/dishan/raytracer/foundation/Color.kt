@@ -8,7 +8,7 @@ class Color(val red: Float, val green: Float, val blue: Float) {
         val White = Color(1f, 1f, 1f)
     }
 
-    fun closeEnough(other: Color): Boolean {
+    infix fun `~==`(other: Color): Boolean {
         return red `~==` other.red
                 && green `~==` other.green
                 && blue `~==` other.blue
