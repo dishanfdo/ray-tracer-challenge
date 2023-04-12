@@ -5,7 +5,6 @@ import com.dishan.raytracer.output.toPPM
 import com.dishan.raytracer.rays.Ray
 import com.dishan.raytracer.rays.Sphere
 import com.dishan.raytracer.rays.hit
-import com.dishan.raytracer.rays.intersect
 import com.dishan.raytracer.samples.projectile.writeToFile
 
 fun main() {

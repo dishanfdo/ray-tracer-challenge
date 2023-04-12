@@ -5,6 +5,7 @@ import com.dishan.raytracer.foundation.*
 interface Object {
     val material: Material
     fun normalAt(point: Tuple): Tuple
+    fun intersect(ray: Ray): Intersections
 
     infix fun `~==`(other: Object): Boolean
 }

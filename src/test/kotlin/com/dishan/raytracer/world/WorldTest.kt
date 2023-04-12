@@ -1,12 +1,11 @@
 package com.dishan.raytracer.world
 
-import com.dishan.raytracer.foundation.Color
-import com.dishan.raytracer.foundation.identity
-import com.dishan.raytracer.foundation.point
-import com.dishan.raytracer.foundation.scale
+import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.rays.PointLight
+import com.dishan.raytracer.rays.Ray
 import com.dishan.raytracer.rays.Sphere
 import com.dishan.raytracer.rays.material
+import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -40,5 +39,19 @@ class WorldTest {
         assert(w.light!! `~==` light)
         assert(s1 in w)
         assert(s2 in w)
+    }
+
+    @Test
+    fun `Intersect a world with a ray`() {
+        val w = defaultWorld()
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+
+        val xs = w.intersect(r)
+
+        assert(xs.size == 4)
+        assert(xs[0].t `~==` 4.0f)
+        assert(xs[1].t `~==` 4.5f)
+        assert(xs[2].t `~==` 5.5f)
+        assert(xs[3].t `~==` 6.0f)
     }
 }

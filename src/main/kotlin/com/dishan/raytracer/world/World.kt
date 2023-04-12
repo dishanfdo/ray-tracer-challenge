@@ -11,9 +11,16 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
     fun isEmpty(): Boolean = objects.isEmpty()
 
     operator fun contains(body: Object): Boolean = objects.any { it `~==` body }
+
+    fun intersect(ray: Ray): Intersections {
+        return objects
+            .map { body -> body.intersect(ray) }.flatten()
+            .sortedBy { intersection -> intersection.t }
+    }
 }
 
 fun world(): World = World()
+
 fun defaultWorld(): World {
     val light = PointLight(point(-10, 10, -10), Color(1f, 1f, 1f))
     val s1 = Sphere().apply {
