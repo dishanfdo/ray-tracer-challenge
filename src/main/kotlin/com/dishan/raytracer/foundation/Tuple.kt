@@ -37,6 +37,15 @@ class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
     operator fun div(d: Float): Tuple = this * (1 / d)
 }
 
+fun Tuple.copyWith(x: Float? = null, y: Float? = null, z: Float? = null, w: Float? = null): Tuple {
+    return Tuple(
+        x = x ?: this.x,
+        y = y ?: this.y,
+        z = z ?: this.z,
+        w = w ?: this.w
+    )
+}
+
 fun tuple(x: Float, y: Float, z: Float, w: Float): Tuple = Tuple(x, y, z, w)
 fun tuple(x: Int, y: Int, z: Int, w: Int): Tuple = Tuple(x, y, z, w)
 

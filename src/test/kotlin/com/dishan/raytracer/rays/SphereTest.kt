@@ -5,6 +5,8 @@ import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import kotlin.math.PI
+import kotlin.math.sqrt
 
 class SphereTest {
 
@@ -101,5 +103,65 @@ class SphereTest {
 
         val xs = s.intersect(r)
         assert(xs.isEmpty())
+    }
+
+    @Test
+    fun `The normal on a sphere at a point on the x axis`() {
+        val s = Sphere()
+        val n = s.normalAt(point(1, 0, 0))
+
+        assert(n `~==` vector(1, 0, 0))
+    }
+
+    @Test
+    fun `The normal on a sphere at a point on the y axis`() {
+        val s = Sphere()
+        val n = s.normalAt(point(0, 1, 0))
+
+        assert(n `~==` vector(0, 1, 0))
+    }
+
+    @Test
+    fun `The normal on a sphere at a point on the z axis`() {
+        val s = Sphere()
+        val n = s.normalAt(point(0, 0, 1))
+
+        assert(n `~==` vector(0, 0, 1))
+    }
+
+    @Test
+    fun `The normal on a sphere at a non-axial point`() {
+        val s = Sphere()
+        val n = s.normalAt(point(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+
+        assert(n `~==` vector(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+    }
+
+    @Test
+    fun `The normal is a normalized vector`() {
+        val s = Sphere()
+        val n = s.normalAt(point(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+
+        assert(n `~==` n.normalized())
+    }
+
+    @Test
+    fun `Computing the normal on a translated sphere`() {
+        val s = Sphere()
+        s.transform = translation(0, 1, 0)
+        val n = s.normalAt(point(0f, 1.70711f, -0.70711f))
+
+        assert(n `~==` vector(0f, 0.70711f, -0.70711f))
+    }
+
+    @Test
+    fun `Computing the normal on a transformed sphere`() {
+        val s = Sphere()
+        val m = scaling(1f, 0.5f, 1f) * rotationZ(PI / 5)
+        s.transform = m
+
+        val n = s.normalAt(point(0f, sqrt(2f)/2, -sqrt(2f)/2))
+
+        assert(n `~==` vector(0f, 0.97014f, -0.24254f))
     }
 }

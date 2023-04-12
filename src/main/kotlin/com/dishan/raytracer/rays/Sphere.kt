@@ -1,12 +1,10 @@
 package com.dishan.raytracer.rays
 
-import com.dishan.raytracer.foundation.Matrix4
-import com.dishan.raytracer.foundation.dot
-import com.dishan.raytracer.foundation.inversed
-import com.dishan.raytracer.foundation.point
+import com.dishan.raytracer.foundation.*
 import kotlin.math.sqrt
 
 class Sphere private constructor(val id: Int) : Object {
+
     companion object {
         private var nextId = 1
     }
@@ -14,6 +12,13 @@ class Sphere private constructor(val id: Int) : Object {
     constructor() : this(nextId++)
 
     var transform: Matrix4 = Matrix4.identity
+}
+
+fun Sphere.normalAt(point: Tuple): Tuple {
+    val objectPoint = transform.inversed() * point
+    val objectNormal = objectPoint - point(0, 0, 0)
+    val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0f)
+    return worldNormal.normalized()
 }
 
 fun Sphere.intersect(ray: Ray): Intersections {
