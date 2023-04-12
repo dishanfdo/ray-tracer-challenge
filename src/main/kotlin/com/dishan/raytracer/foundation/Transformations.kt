@@ -15,9 +15,9 @@ fun translation(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 {
     }
 }
 
-fun scaling(x: Int = 0, y: Int = 0, z: Int = 0): Matrix4 = scaling(x.toFloat(), y.toFloat(), z.toFloat())
+fun scaling(x: Int = 1, y: Int = 1, z: Int = 1): Matrix4 = scaling(x.toFloat(), y.toFloat(), z.toFloat())
 
-fun scaling(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 {
+fun scaling(x: Float = 1f, y: Float = 1f, z: Float = 1f): Matrix4 {
     return Matrix4.identity.apply {
         this[0, 0] = x
         this[1, 1] = y
@@ -76,8 +76,8 @@ fun identity() = Matrix4.identity
 fun Matrix4.translate(x: Int = 0, y: Int = 0, z: Int = 0): Matrix4 = translation(x, y, z) * this
 fun Matrix4.translate(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 = translation(x, y, z) * this
 
-fun Matrix4.scale(x: Int = 0, y: Int = 0, z: Int = 0): Matrix4 = scaling(x, y, z) * this
-fun Matrix4.scale(x: Float = 0f, y: Float = 0f, z: Float = 0f): Matrix4 = scaling(x, y, z) * this
+fun Matrix4.scale(x: Int = 1, y: Int = 1, z: Int = 1): Matrix4 = scaling(x, y, z) * this
+fun Matrix4.scale(x: Float = 1f, y: Float = 1f, z: Float = 1f): Matrix4 = scaling(x, y, z) * this
 
 fun Matrix4.rotateX(angle: Double): Matrix4 = rotationX(angle) * this
 fun Matrix4.rotateY(angle: Double): Matrix4 = rotationY(angle) * this
