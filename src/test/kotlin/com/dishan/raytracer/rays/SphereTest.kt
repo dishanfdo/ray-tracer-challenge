@@ -164,4 +164,21 @@ class SphereTest {
 
         assert(n `~==` vector(0f, 0.97014f, -0.24254f))
     }
+
+    @Test
+    fun `A sphere has a default material`() {
+        val s = Sphere()
+        val m = s.material
+
+        assert(m `~==` material())
+    }
+
+    @Test
+    fun `A sphere may be assigned a material`() {
+        val s = Sphere()
+        val m = material(ambient = 1f)
+        s.material = m
+
+        assert(s.material `~==` m)
+    }
 }

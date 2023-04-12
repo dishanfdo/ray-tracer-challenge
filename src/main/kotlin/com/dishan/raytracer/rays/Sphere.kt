@@ -11,6 +11,7 @@ class Sphere private constructor(val id: Int) : Object {
 
     constructor() : this(nextId++)
 
+    var material: Material = material()
     var transform: Matrix4 = Matrix4.identity
 }
 
