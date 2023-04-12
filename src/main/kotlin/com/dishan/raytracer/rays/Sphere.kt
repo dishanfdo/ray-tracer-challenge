@@ -11,15 +11,15 @@ class Sphere private constructor(val id: Int) : Object {
 
     constructor() : this(nextId++)
 
-    var material: Material = material()
+    override var material: Material = material()
     var transform: Matrix4 = Matrix4.identity
-}
 
-fun Sphere.normalAt(point: Tuple): Tuple {
-    val objectPoint = transform.inversed() * point
-    val objectNormal = objectPoint - point(0, 0, 0)
-    val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0f)
-    return worldNormal.normalized()
+    override fun normalAt(point: Tuple): Tuple {
+        val objectPoint = transform.inversed() * point
+        val objectNormal = objectPoint - point(0, 0, 0)
+        val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0f)
+        return worldNormal.normalized()
+    }
 }
 
 fun Sphere.intersect(ray: Ray): Intersections {

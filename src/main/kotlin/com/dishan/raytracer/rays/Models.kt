@@ -1,6 +1,11 @@
 package com.dishan.raytracer.rays
 
-interface Object
+import com.dishan.raytracer.foundation.*
+
+interface Object {
+    val material: Material
+    fun normalAt(point: Tuple): Tuple
+}
 
 class Intersection(val t: Float, val body: Object)
 
