@@ -2,6 +2,7 @@ package com.dishan.raytracer.foundation
 
 import com.dishan.raytracer.foundation.Type.*
 import org.junit.jupiter.api.Test
+import kotlin.math.sqrt
 
 class TupleTest {
 
@@ -31,5 +32,23 @@ class TupleTest {
         val point = vector(4, -4, 3)
 
         assert(point `~==` Tuple(4, -4, 3, 0))
+    }
+
+    @Test
+    fun `Reflecting a vector approaching at 45 degrees`() {
+        val v = vector(1, -1, 0)
+        val n = vector(0, 1, 0)
+        val r = v.reflect(n)
+
+        assert(r `~==` vector(1, 1, 0))
+    }
+
+    @Test
+    fun `Reflecting a vector off a slanted surface`() {
+        val v = vector(0, -1, 0)
+        val n = vector(sqrt(2f) / 2, sqrt(2f) / 2, 0f)
+        val r = v.reflect(n)
+
+        assert(r `~==` vector(1, 0, 0))
     }
 }

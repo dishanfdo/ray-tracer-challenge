@@ -9,7 +9,7 @@ enum class Type {
 
 class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
 
-    constructor(x: Int, y: Int, z: Int, w: Int): this(x.toFloat(), y.toFloat(), z.toFloat(), w.toFloat())
+    constructor(x: Int, y: Int, z: Int, w: Int) : this(x.toFloat(), y.toFloat(), z.toFloat(), w.toFloat())
 
     val type: Type = when (w) {
         0.0f -> Vector
@@ -55,3 +55,6 @@ fun point(x: Int, y: Int, z: Int): Tuple = Tuple(x, y, z, 1)
 fun vector(x: Float, y: Float, z: Float): Tuple = Tuple(x, y, z, 0.0f)
 fun vector(x: Int, y: Int, z: Int): Tuple = Tuple(x, y, z, 0)
 
+fun Tuple.reflect(normal: Tuple): Tuple {
+    return this - normal * 2f * (this dot normal)
+}
