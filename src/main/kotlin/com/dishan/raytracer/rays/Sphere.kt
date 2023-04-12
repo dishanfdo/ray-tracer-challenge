@@ -20,6 +20,11 @@ class Sphere private constructor(val id: Int) : Object {
         val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0f)
         return worldNormal.normalized()
     }
+
+    override fun `~==`(other: Object): Boolean {
+        if (other !is Sphere) return false
+        return transform `~==` other.transform && material `~==` other.material
+    }
 }
 
 fun Sphere.intersect(ray: Ray): Intersections {
