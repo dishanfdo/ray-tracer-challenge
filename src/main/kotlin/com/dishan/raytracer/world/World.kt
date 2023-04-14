@@ -12,10 +12,31 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
 
     operator fun contains(body: Object): Boolean = objects.any { it `~==` body }
 
+    operator fun get(i: Int): Object = objects[i]
+
+    fun first(): Object = objects.first()
+
     fun intersect(ray: Ray): Intersections {
         return objects
             .map { body -> body.intersect(ray) }.flatten()
             .sortedBy { intersection -> intersection.t }
+    }
+
+    fun shadeHit(computation: Computation): Color {
+        val light = light ?: error("No light source")
+        return computation.body.material.lighting(
+            light = light,
+            point = computation.point,
+            eye = computation.eyev,
+            normal = computation.normalv
+        )
+    }
+
+    fun colorAt(ray: Ray): Color {
+        val intersections = intersect(ray)
+        val hit = intersections.hit() ?: return Color.Black
+        val computation = hit.prepareComputation(ray)
+        return shadeHit(computation)
     }
 }
 

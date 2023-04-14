@@ -3,7 +3,7 @@ package com.dishan.raytracer.rays
 import com.dishan.raytracer.foundation.*
 
 interface Object {
-    val material: Material
+    var material: Material
     fun normalAt(point: Tuple): Tuple
     fun intersect(ray: Ray): Intersections
 

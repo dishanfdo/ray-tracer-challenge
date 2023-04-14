@@ -1,10 +1,7 @@
 package com.dishan.raytracer.world
 
 import com.dishan.raytracer.foundation.*
-import com.dishan.raytracer.rays.PointLight
-import com.dishan.raytracer.rays.Ray
-import com.dishan.raytracer.rays.Sphere
-import com.dishan.raytracer.rays.material
+import com.dishan.raytracer.rays.*
 import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 
@@ -53,5 +50,65 @@ class WorldTest {
         assert(xs[1].t `~==` 4.5f)
         assert(xs[2].t `~==` 5.5f)
         assert(xs[3].t `~==` 6.0f)
+    }
+
+    @Test
+    fun `Shading an intersection`() {
+        val w = defaultWorld()
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val shape = w.first()
+        val i = Intersection(4.0f, shape)
+
+        val comps = i.prepareComputation(r)
+        val c = w.shadeHit(comps)
+
+        assert(c `~==` Color(0.38066f, 0.47583f, 0.2855f))
+    }
+
+    @Test
+    fun `Shading an intersection from the inside`() {
+        val w = defaultWorld()
+        w.light = PointLight(point(0f, 0.25f, 0f), Color(1f, 1f, 1f))
+        val r = Ray(point(0, 0, 0), vector(0, 0, 1))
+        val shape = w[1]
+        val i = Intersection(0.5f, shape)
+
+        val comps = i.prepareComputation(r)
+        val c = w.shadeHit(comps)
+
+        assert(c `~==` Color(0.90498f, 0.90498f, 0.90498f))
+    }
+
+    @Test
+    fun `The color when a ray misses`() {
+        val w = defaultWorld()
+        val r = Ray(point(0, 0, -5), vector(0, 1, 0))
+
+        val c = w.colorAt(r)
+        assert(c `~==` Color(0f, 0f, 0f))
+    }
+
+    @Test
+    fun `The color when a ray hits`() {
+        val w = defaultWorld()
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+
+        val c = w.colorAt(r)
+        assert(c `~==` Color(0.38066f, 0.47583f, 0.2855f))
+    }
+
+    @Test
+    fun `The color with an intersection behind the ray`() {
+        val w = defaultWorld()
+        val outer = w[0]
+        outer.material = outer.material.copyWith(ambient = 1.0f)
+
+        val inner = w[1]
+        inner.material = inner.material.copyWith(ambient = 1.0f)
+
+        val r = Ray(point(0f, 0f, 0.75f), vector(0, 0, -1))
+
+        val c = w.colorAt(r)
+        assert(c `~==` inner.material.color)
     }
 }

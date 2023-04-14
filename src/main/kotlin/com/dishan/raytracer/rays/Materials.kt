@@ -12,6 +12,22 @@ class Material(val color: Color, val ambient: Float, val diffuse: Float, val spe
                 specular `~==` other.specular &&
                 shininess `~==` other.shininess
     }
+
+    fun copyWith(
+        color: Color? = null,
+        ambient: Float? = null,
+        diffuse: Float? = null,
+        specular: Float? = null,
+        shininess: Float? = null,
+    ): Material {
+        return Material(
+            color = color ?: this.color,
+            ambient = ambient ?: this.ambient,
+            diffuse = diffuse ?: this.diffuse,
+            specular = specular ?: this.specular,
+            shininess = shininess ?: this.shininess,
+        )
+    }
 }
 
 fun material(
