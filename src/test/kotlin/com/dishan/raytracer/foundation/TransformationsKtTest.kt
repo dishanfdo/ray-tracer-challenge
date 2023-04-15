@@ -175,4 +175,51 @@ class TransformationsKtTest {
 
         assert(t * p `~==` point(15, 0, 7))
     }
+
+    @Test
+    fun `The transformation matrix for the default orientation`() {
+        val from = point(0, 0, 0)
+        val to = point(0, 0, -1)
+        val up = vector(0, 1, 0)
+
+        val t = viewTransform(from, to, up)
+        assert(t `~==` identity())
+    }
+
+    @Test
+    fun `A view transformation matrix looking in positive z direction`() {
+        val from = point(0, 0, 0)
+        val to = point(0, 0, 1)
+        val up = vector(0, 1, 0)
+
+        val t = viewTransform(from, to, up)
+        assert(t `~==` scaling(-1, 1, -1))
+    }
+
+    @Test
+    fun `The view transformation moves the world`() {
+        val from = point(0, 0, 8)
+        val to = point(0, 0, 0)
+        val up = vector(0, 1, 0)
+
+        val t = viewTransform(from, to, up)
+        assert(t `~==` translation(0, 0, -8))
+    }
+
+    @Test
+    fun `An arbitrary view transformation`() {
+        val from = point(1, 3, 2)
+        val to = point(4, -2, 8)
+        val up = vector(1, 1, 0)
+
+        val t = viewTransform(from, to, up)
+        val result = Matrix4(
+            -0.50709f, +0.50709f, +0.67612f, -2.36643f,
+            +0.76772f, +0.60609f, +0.12122f, -2.82843f,
+            -0.35857f, +0.59761f, -0.71714f, +0.00000f,
+            +0.00000f, +0.00000f, +0.00000f, +1.00000f,
+        )
+
+        assert(t `~==` result)
+    }
 }

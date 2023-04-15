@@ -94,3 +94,18 @@ fun Matrix4.shear(
     zx: Float = 0f,
     zy: Float = 0f
 ): Matrix4 = shearing(xy, xz, yx, yz, zx, zy) * this
+
+fun viewTransform(from: Tuple, to: Tuple, up: Tuple): Matrix4 {
+    val forward = (to - from).normalized()
+    val upn = up.normalized()
+    val left = forward cross upn
+    val trueUp = left cross forward
+    val orientation = Matrix4(
+        left.x, left.y, left.z, 0.0f,
+        trueUp.x, trueUp.y, trueUp.z, 0.0f,
+        -forward.x, -forward.y, -forward.z, 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f,
+    )
+
+    return orientation * translation(-from.x, -from.y, -from.z)
+}
