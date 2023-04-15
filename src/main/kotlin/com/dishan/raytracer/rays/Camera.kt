@@ -1,6 +1,7 @@
 package com.dishan.raytracer.rays
 
 import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.world.World
 import kotlin.math.tan
 
 class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transform: Matrix4) {
@@ -41,6 +42,19 @@ class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transfo
         val direction = (pixel - origin).normalized()
 
         return Ray(origin, direction)
+    }
+
+    fun render(world: World): Canvas {
+        val image = Canvas(hSize, vSize)
+        for (y in 0 until vSize) {
+            for (x in 0 until hSize) {
+                val ray = rayForPixel(x, y)
+                val color = world.colorAt(ray)
+                image[x, y] = color
+            }
+        }
+
+        return image
     }
 
 }

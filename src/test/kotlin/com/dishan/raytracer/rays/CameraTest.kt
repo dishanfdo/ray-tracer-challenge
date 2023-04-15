@@ -2,6 +2,7 @@ package com.dishan.raytracer.rays
 
 import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.util.`~==`
+import com.dishan.raytracer.world.defaultWorld
 import org.junit.jupiter.api.Test
 
 import kotlin.math.PI
@@ -68,5 +69,20 @@ class CameraTest {
 
         assert(r.origin `~==` point(0, 2, -5))
         assert(r.direction `~==` vector(sqrt(2f) / 2, 0.0f, -sqrt(2f) / 2))
+    }
+
+    @Test
+    fun `Rendering a world with a camera`() {
+        val w = defaultWorld()
+
+        val from = point(0, 0, -5)
+        val to = point(0, 0, 0)
+        val up = vector(0, 1, 0)
+        val transform = viewTransform(from, to, up)
+
+        val c = camera(11, 11, (PI / 2).toFloat(), transform)
+        val image = c.render(w)
+
+        assert(image[5, 5] `~==` Color(0.38066f, 0.47583f, 0.2855f))
     }
 }
