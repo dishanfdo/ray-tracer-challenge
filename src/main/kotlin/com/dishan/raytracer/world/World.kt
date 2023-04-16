@@ -16,6 +16,10 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
 
     fun first(): Object = objects.first()
 
+    fun add(body: Object) {
+        objects.add(body)
+    }
+
     fun intersect(ray: Ray): Intersections {
         return objects
             .map { body -> body.intersect(ray) }.flatten()
