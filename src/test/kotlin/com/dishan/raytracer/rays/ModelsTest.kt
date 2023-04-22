@@ -1,7 +1,7 @@
 package com.dishan.raytracer.rays
 
-import com.dishan.raytracer.foundation.point
-import com.dishan.raytracer.foundation.vector
+import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.util.EPSILON
 import com.dishan.raytracer.util.`~==`
 import org.junit.jupiter.api.Test
 import kotlin.test.assertNull
@@ -106,5 +106,19 @@ class ModelsTest {
         assert(comps.inside)
         // normal would have been (0, 0, 1), but is inverted!
         assert(comps.normalv `~==` vector(0, 0, -1))
+    }
+
+    @Test
+    fun `The hit should offset the point`() {
+        val r = Ray(point(0, 0, -5), vector(0, 0, 1))
+        val shape = Sphere()
+        shape.transform = identity().translate(0, 0,1)
+
+        val i = Intersection(5f, shape)
+
+        val comps = i.prepareComputation(r)
+
+        assert(comps.overPoint.z < - EPSILON /2)
+        assert(comps.point.z > comps.overPoint.z)
     }
 }

@@ -1,6 +1,7 @@
 package com.dishan.raytracer.rays
 
 import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.util.EPSILON
 
 interface Object {
     var material: Material
@@ -16,13 +17,16 @@ class Intersection(val t: Float, val body: Object) {
         val normalv = body.normalAt(point)
         val eyev = -ray.direction
         val isInside = (normalv dot eyev) < 0
+        val correctedNormal = if (isInside) -normalv else normalv
+        val overPoint = point + correctedNormal * EPSILON
 
         return Computation(
             t = t,
             body = body,
             point = point,
+            overPoint = overPoint,
             eyev = eyev,
-            normalv = if (isInside) -normalv else normalv,
+            normalv = correctedNormal,
             inside = isInside
         )
     }
@@ -38,7 +42,12 @@ class Computation(
     val t: Float,
     val body: Object,
     val point: Tuple,
+    val overPoint: Tuple,
     val eyev: Tuple,
     val normalv: Tuple,
     val inside: Boolean,
-)
+) {
+    override fun toString(): String {
+        return "[\n p: $point \nop: $overPoint \n n: $normalv\n]"
+    }
+}

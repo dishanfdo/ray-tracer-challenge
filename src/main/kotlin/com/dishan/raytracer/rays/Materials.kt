@@ -44,7 +44,7 @@ fun material(
     shininess
 )
 
-fun Material.lighting(light: Light, point: Tuple, eye: Tuple, normal: Tuple): Color {
+fun Material.lighting(light: Light, point: Tuple, eye: Tuple, normal: Tuple, inShadow: Boolean = false): Color {
     // combine the surface color with the light's color/intensity
     val effectiveColor = color * light.intensity
 
@@ -61,7 +61,7 @@ fun Material.lighting(light: Light, point: Tuple, eye: Tuple, normal: Tuple): Co
 
     val diffuseC: Color
     val specularC: Color
-    if (lightDotNormal < 0) {
+    if (lightDotNormal < 0 || inShadow) {
         diffuseC = Color.Black
         specularC = Color.Black
     } else {

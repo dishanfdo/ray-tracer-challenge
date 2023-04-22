@@ -74,8 +74,8 @@ fun main() {
     world.add(left)
 
     val camera = camera(
-        hSize = 1000,
-        vSize = 500,
+        hSize = 100,
+        vSize = 50,
         fieldOfView = (PI / 3).toFloat(),
         transform = viewTransform(
             from = point(x = 0f, y = 1.5f, z = -5f),

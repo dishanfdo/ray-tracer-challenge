@@ -1,9 +1,6 @@
 package com.dishan.raytracer.world
 
-import com.dishan.raytracer.foundation.Color
-import com.dishan.raytracer.foundation.identity
-import com.dishan.raytracer.foundation.point
-import com.dishan.raytracer.foundation.scale
+import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.rays.*
 
 class World(private val objects: MutableList<Object> = mutableListOf(), var light: Light? = null) {
@@ -28,11 +25,14 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
 
     fun shadeHit(computation: Computation): Color {
         val light = light ?: error("No light source")
+        println("comp: $computation")
+        println("InShadow: ${isShadowed(computation.overPoint)}")
         return computation.body.material.lighting(
             light = light,
             point = computation.point,
             eye = computation.eyev,
-            normal = computation.normalv
+            normal = computation.normalv,
+            inShadow = isShadowed(computation.overPoint)
         )
     }
 
@@ -41,6 +41,20 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
         val hit = intersections.hit() ?: return Color.Black
         val computation = hit.prepareComputation(ray)
         return shadeHit(computation)
+    }
+
+    fun isShadowed(point: Tuple): Boolean {
+        val light = light ?: error("No light source")
+        val v = light.position - point
+        val distance = v.magnitude
+        val direction = v.normalized()
+
+        val r = Ray(point, direction)
+        val intersections = intersect(r)
+
+        val h = intersections.hit()
+        println("dist: $distance, t: ${h?.t}")
+        return h != null && h.t < distance
     }
 }
 
