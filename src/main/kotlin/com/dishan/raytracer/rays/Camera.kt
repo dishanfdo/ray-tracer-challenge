@@ -48,11 +48,9 @@ class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transfo
         val image = Canvas(hSize, vSize)
         for (y in 0 until vSize) {
             for (x in 0 until hSize) {
-                println("($x, $y): start ----")
                 val ray = rayForPixel(x, y)
                 val color = world.colorAt(ray)
                 image[x, y] = color
-                println("($x, $y): ------ end")
             }
         }
 

@@ -25,8 +25,6 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
 
     fun shadeHit(computation: Computation): Color {
         val light = light ?: error("No light source")
-        println("comp: $computation")
-        println("InShadow: ${isShadowed(computation.overPoint)}")
         return computation.body.material.lighting(
             light = light,
             point = computation.point,
@@ -53,7 +51,6 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
         val intersections = intersect(r)
 
         val h = intersections.hit()
-        println("dist: $distance, t: ${h?.t}")
         return h != null && h.t < distance
     }
 }
