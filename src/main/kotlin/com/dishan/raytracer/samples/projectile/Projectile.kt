@@ -34,11 +34,11 @@ fun runSimulation(projectile: Projectile, env: Environment, canvas: Canvas) {
 
 fun main() {
     val start = point(0, 1, 0)
-    val velocity = vector(1f, 1.8f, 0f).normalized() * 11.25f
+    val velocity = vector(1.0, 1.8, 0.0).normalized() * 11.25
     val p = Projectile(start, velocity)
 
-    val gravity = vector(0f, -0.1f, 0f)
-    val wind = vector(-0.01f, 0f, 0f)
+    val gravity = vector(0.0, -0.1, 0.0)
+    val wind = vector(-0.01, 0.0, 0.0)
     val env = Environment(gravity, wind)
 
     val canvas = Canvas(900, 550)

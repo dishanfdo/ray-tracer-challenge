@@ -1,19 +1,21 @@
 package com.dishan.raytracer.foundation
 
 import com.dishan.raytracer.foundation.Type.*
+import com.dishan.raytracer.util.Num
+import com.dishan.raytracer.util.toNum
 import com.dishan.raytracer.util.`~==`
 
 enum class Type {
     Point, Vector, Other
 }
 
-class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
+class Tuple(val x: Num, val y: Num, val z: Num, val w: Num) {
 
-    constructor(x: Int, y: Int, z: Int, w: Int) : this(x.toFloat(), y.toFloat(), z.toFloat(), w.toFloat())
+    constructor(x: Int, y: Int, z: Int, w: Int) : this(x.toNum(), y.toNum(), z.toNum(), w.toNum())
 
     val type: Type = when (w) {
-        0.0f -> Vector
-        1.0f -> Point
+        0.0 -> Vector
+        1.0 -> Point
         else -> Other
     }
 
@@ -32,12 +34,12 @@ class Tuple(val x: Float, val y: Float, val z: Float, val w: Float) {
 
     operator fun unaryMinus(): Tuple = Tuple(-x, -y, -z, -w)
 
-    operator fun times(t: Float): Tuple = Tuple(t * x, t * y, t * z, t * w)
+    operator fun times(t: Num): Tuple = Tuple(t * x, t * y, t * z, t * w)
 
-    operator fun div(d: Float): Tuple = this * (1 / d)
+    operator fun div(d: Num): Tuple = this * (1 / d)
 }
 
-fun Tuple.copyWith(x: Float? = null, y: Float? = null, z: Float? = null, w: Float? = null): Tuple {
+fun Tuple.copyWith(x: Num? = null, y: Num? = null, z: Num? = null, w: Num? = null): Tuple {
     return Tuple(
         x = x ?: this.x,
         y = y ?: this.y,
@@ -46,15 +48,15 @@ fun Tuple.copyWith(x: Float? = null, y: Float? = null, z: Float? = null, w: Floa
     )
 }
 
-fun tuple(x: Float, y: Float, z: Float, w: Float): Tuple = Tuple(x, y, z, w)
+fun tuple(x: Num, y: Num, z: Num, w: Num): Tuple = Tuple(x, y, z, w)
 fun tuple(x: Int, y: Int, z: Int, w: Int): Tuple = Tuple(x, y, z, w)
 
-fun point(x: Float, y: Float, z: Float): Tuple = Tuple(x, y, z, 1.0f)
+fun point(x: Num, y: Num, z: Num): Tuple = Tuple(x, y, z, 1.0)
 fun point(x: Int, y: Int, z: Int): Tuple = Tuple(x, y, z, 1)
 
-fun vector(x: Float, y: Float, z: Float): Tuple = Tuple(x, y, z, 0.0f)
+fun vector(x: Num, y: Num, z: Num): Tuple = Tuple(x, y, z, 0.0)
 fun vector(x: Int, y: Int, z: Int): Tuple = Tuple(x, y, z, 0)
 
 fun Tuple.reflect(normal: Tuple): Tuple {
-    return this - normal * 2f * (this dot normal)
+    return this - normal * 2.0 * (this dot normal)
 }

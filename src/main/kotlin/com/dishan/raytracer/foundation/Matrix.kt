@@ -1,11 +1,12 @@
 package com.dishan.raytracer.foundation
 
+import com.dishan.raytracer.util.Num
 import com.dishan.raytracer.util.`~!=`
 import com.dishan.raytracer.util.`~==`
 
 open class Matrix(val rows: Int, val cols: Int) {
 
-    constructor(rows: Int, cols: Int, vararg elements: Float) : this(rows, cols) {
+    constructor(rows: Int, cols: Int, vararg elements: Num) : this(rows, cols) {
         for (i in elements.indices) {
             this.elements[i] = elements[i]
         }
@@ -13,7 +14,7 @@ open class Matrix(val rows: Int, val cols: Int) {
 
     companion object {
 
-        fun create(rows: Int, cols: Int, init: (Int, Int) -> Float): Matrix {
+        fun create(rows: Int, cols: Int, init: (Int, Int) -> Num): Matrix {
             val matrix = Matrix(rows, cols)
             for (row in 0 until rows) {
                 for (col in 0 until cols) {
@@ -24,7 +25,7 @@ open class Matrix(val rows: Int, val cols: Int) {
         }
     }
 
-    private val elements = FloatArray(rows * cols)
+    private val elements = DoubleArray(rows * cols)
 
     infix fun `~==`(other: Matrix): Boolean {
         return this.rows == other.rows
@@ -47,14 +48,14 @@ open class Matrix(val rows: Int, val cols: Int) {
         }
     }
 
-    operator fun get(row: Int, col: Int): Float = elements[row * cols + col]
+    operator fun get(row: Int, col: Int): Num = elements[row * cols + col]
 
-    operator fun set(row: Int, col: Int, value: Float) {
+    operator fun set(row: Int, col: Int, value: Num) {
         elements[row * cols + col] = value
     }
 }
 
-class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
+class Matrix4(vararg elements: Num) : Matrix(4, 4, *elements) {
     operator fun times(other: Matrix4): Matrix4 {
         val matrix = Matrix4()
         for (row in 0..3) {
@@ -77,43 +78,43 @@ class Matrix4(vararg elements: Float) : Matrix(4, 4, *elements) {
         return tuple(x, y, z, w)
     }
 
-    val determinant: Float
+    val determinant: Num
         get() = this[0, 0] * cofactor(0, 0) +
                 this[0, 1] * cofactor(0, 1) +
                 this[0, 2] * cofactor(0, 2) +
                 this[0, 3] * cofactor(0, 3)
 
     companion object {
-        fun create(init: (Int, Int) -> Float) = create(4, 4, init)
+        fun create(init: (Int, Int) -> Num) = create(4, 4, init)
 
         val identity: Matrix4
             get() = Matrix4(
-                1f, 0f, 0f, 0f,
-                0f, 1f, 0f, 0f,
-                0f, 0f, 1f, 0f,
-                0f, 0f, 0f, 1f,
+                1.0, 0.0, 0.0, 0.0,
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+                0.0, 0.0, 0.0, 1.0,
             )
     }
 }
 
-class Matrix2(vararg elements: Float) : Matrix(2, 2, *elements) {
-    val determinant: Float
+class Matrix2(vararg elements: Num) : Matrix(2, 2, *elements) {
+    val determinant: Num
         get() = this[0, 0] * this[1, 1] - this[0, 1] * this[1, 0]
 
     companion object {
-        fun create(init: (Int, Int) -> Float) = create(2, 2, init)
+        fun create(init: (Int, Int) -> Num) = create(2, 2, init)
     }
 }
 
-class Matrix3(vararg elements: Float) : Matrix(3, 3, *elements) {
-    val determinant: Float
+class Matrix3(vararg elements: Num) : Matrix(3, 3, *elements) {
+    val determinant: Num
         get() = this[0, 0] * cofactor(0, 0) +
                 this[0, 1] * cofactor(0, 1) +
                 this[0, 2] * cofactor(0, 2)
 
 
     companion object {
-        fun create(init: (Int, Int) -> Float) = create(3, 3, init)
+        fun create(init: (Int, Int) -> Num) = create(3, 3, init)
     }
 
 }
@@ -168,25 +169,25 @@ fun Matrix4.transposed(): Matrix4 {
 }
 
 
-fun Matrix3.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
+fun Matrix3.minor(row: Int, col: Int): Num = submatrix(row, col).determinant
 
-fun Matrix3.cofactor(row: Int, col: Int): Float {
+fun Matrix3.cofactor(row: Int, col: Int): Num {
     val sign = if ((row + col) % 2 == 0) 1 else -1
     return minor(row, col) * sign
 }
 
-fun Matrix4.minor(row: Int, col: Int): Float = submatrix(row, col).determinant
+fun Matrix4.minor(row: Int, col: Int): Num = submatrix(row, col).determinant
 
-fun Matrix4.cofactor(row: Int, col: Int): Float {
+fun Matrix4.cofactor(row: Int, col: Int): Num {
     val sign = if ((row + col) % 2 == 0) 1 else -1
     return minor(row, col) * sign
 }
 
-fun Matrix4.isInvertible(): Boolean = determinant `~!=` 0f
+fun Matrix4.isInvertible(): Boolean = determinant `~!=` 0.0
 
 fun Matrix4.inversed(): Matrix4 {
     val determinant = determinant
-    if (determinant `~==` 0f) error("Matrix $this is not invertible")
+    if (determinant `~==` 0.0) error("Matrix $this is not invertible")
 
     val inversed = Matrix4()
     for (row in 0 until rows) {

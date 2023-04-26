@@ -1,12 +1,14 @@
 package com.dishan.raytracer.output
 
 import com.dishan.raytracer.foundation.Canvas
+import com.dishan.raytracer.util.Num
+import com.dishan.raytracer.util.toNum
 import kotlin.math.roundToInt
 
 fun Canvas.toPPM(colorDepth: Int = 255): String {
-    val maxColor = colorDepth.toFloat()
+    val maxColor = colorDepth.toNum()
 
-    fun saveValue(value: Float) = (value * colorDepth).coerceIn(0f .. maxColor).roundToInt()
+    fun saveValue(value: Num) = (value * colorDepth).coerceIn(0.0 .. maxColor).roundToInt()
 
     fun buildLines(): List<String> {
         return buildList {

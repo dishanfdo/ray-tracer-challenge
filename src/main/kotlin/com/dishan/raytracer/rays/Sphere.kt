@@ -17,7 +17,7 @@ class Sphere private constructor(val id: Int) : Object {
     override fun normalAt(point: Tuple): Tuple {
         val objectPoint = transform.inversed() * point
         val objectNormal = objectPoint - point(0, 0, 0)
-        val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0f)
+        val worldNormal = (transform.inversed().transposed() * objectNormal).copyWith(w = 0.0)
         return worldNormal.normalized()
     }
 

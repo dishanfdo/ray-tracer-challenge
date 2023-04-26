@@ -7,24 +7,24 @@ class MatrixArithmeticTest {
     @Test
     fun `Constructing and inspecting a 4x4 matrix method 2`() {
         val a = Matrix4(
-            1f, 2f, 3f, 4f,
-            5f, 6f, 7f, 8f,
-            9f, 8f, 7f, 6f,
-            5f, 4f, 3f, 2f,
+            1.0, 2.0, 3.0, 4.0,
+            5.0, 6.0, 7.0, 8.0,
+            9.0, 8.0, 7.0, 6.0,
+            5.0, 4.0, 3.0, 2.0,
         )
 
         val b = Matrix4(
-            -2f, 1f, 2f, 3f,
-            3f, 2f, 1f, -1f,
-            4f, 3f, 6f, 5f,
-            1f, 2f, 7f, 8f,
+            -2.0, 1.0, 2.0, 3.0,
+            3.0, 2.0, 1.0, -1.0,
+            4.0, 3.0, 6.0, 5.0,
+            1.0, 2.0, 7.0, 8.0,
         )
 
         val expected = Matrix4(
-            20f, 22f, 50f, 48f,
-            44f, 54f, 114f, 108f,
-            40f, 58f, 110f, 102f,
-            16f, 26f, 46f, 42f,
+            20.0, 22.0, 50.0, 48.0,
+            44.0, 54.0, 114.0, 108.0,
+            40.0, 58.0, 110.0, 102.0,
+            16.0, 26.0, 46.0, 42.0,
         )
 
         assert((a * b) `~==` expected)
@@ -33,10 +33,10 @@ class MatrixArithmeticTest {
     @Test
     fun `A matrix multiplied by a tuple`() {
         val a = Matrix4(
-            1f, 2f, 3f, 4f,
-            2f, 4f, 4f, 2f,
-            8f, 6f, 4f, 1f,
-            0f, 0f, 0f, 1f,
+            1.0, 2.0, 3.0, 4.0,
+            2.0, 4.0, 4.0, 2.0,
+            8.0, 6.0, 4.0, 1.0,
+            0.0, 0.0, 0.0, 1.0,
         )
 
         val b = tuple(1, 2, 3, 1)
@@ -46,10 +46,10 @@ class MatrixArithmeticTest {
     @Test
     fun `Multiplying a matrix by the identity matrix`() {
         val a = Matrix4(
-            0f, 1f, 2f, 4f,
-            1f, 2f, 4f, 8f,
-            2f, 4f, 8f, 16f,
-            4f, 8f, 16f, 32f,
+            0.0, 1.0, 2.0, 4.0,
+            1.0, 2.0, 4.0, 8.0,
+            2.0, 4.0, 8.0, 16.0,
+            4.0, 8.0, 16.0, 32.0,
         )
 
         val identity = Matrix4.identity
@@ -66,17 +66,17 @@ class MatrixArithmeticTest {
     @Test
     fun `Transposing a matrix`() {
         val a = Matrix4(
-            0f, 9f, 3f, 0f,
-            9f, 8f, 0f, 8f,
-            1f, 8f, 5f, 3f,
-            0f, 0f, 5f, 8f,
+            0.0, 9.0, 3.0, 0.0,
+            9.0, 8.0, 0.0, 8.0,
+            1.0, 8.0, 5.0, 3.0,
+            0.0, 0.0, 5.0, 8.0,
         )
 
         val expected = Matrix4(
-            0f, 9f, 1f, 0f,
-            9f, 8f, 8f, 0f,
-            3f, 0f, 5f, 5f,
-            0f, 8f, 3f, 8f,
+            0.0, 9.0, 1.0, 0.0,
+            9.0, 8.0, 8.0, 0.0,
+            3.0, 0.0, 5.0, 5.0,
+            0.0, 8.0, 3.0, 8.0,
         )
 
         assert(a.transposed() `~==` expected)

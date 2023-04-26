@@ -9,35 +9,35 @@ class VectorTest {
     fun `computing the magnitude of vector(1, 0, 0)`() {
         val v = vector(1, 0, 0)
 
-        assert(v.magnitude `~==` 1f)
+        assert(v.magnitude `~==` 1.0)
     }
 
     @Test
     fun `computing the magnitude of vector(0, 1, 0)`() {
         val v = vector(0, 1, 0)
 
-        assert(v.magnitude `~==` 1f)
+        assert(v.magnitude `~==` 1.0)
     }
 
     @Test
     fun `computing the magnitude of vector(0, 0, 1)`() {
         val v = vector(0, 0, 1)
 
-        assert(v.magnitude `~==` 1f)
+        assert(v.magnitude `~==` 1.0)
     }
 
     @Test
     fun `computing the magnitude of vector(1, 2, 3)`() {
         val v = vector(1, 2, 3)
 
-        assert(v.magnitude `~==` sqrt(14f))
+        assert(v.magnitude `~==` sqrt(14.0))
     }
 
     @Test
     fun `computing the magnitude of vector(-1, -2, -3)`() {
         val v = vector(-1, -2, -3)
 
-        assert(v.magnitude `~==` sqrt(14f))
+        assert(v.magnitude `~==` sqrt(14.0))
     }
 
     @Test
@@ -51,7 +51,7 @@ class VectorTest {
     fun `normalizing vector(1, 2, 3)`() {
         val v = vector(1, 2, 3)
 
-        assert(v.normalized() `~==` vector(0.26726f, 0.53452f, 0.80178f))
+        assert(v.normalized() `~==` vector(0.26726, 0.53452, 0.80178))
     }
 
     @Test
@@ -59,7 +59,7 @@ class VectorTest {
         val v = vector(1, 2, 3)
         val norm = v.normalized()
 
-        assert(norm.magnitude `~==` 1f)
+        assert(norm.magnitude `~==` 1.0)
     }
 
     @Test
@@ -67,7 +67,7 @@ class VectorTest {
         val a = vector(1, 2, 3)
         val b = vector(2, 3, 4)
 
-        assert((a dot b) `~==` 20f)
+        assert((a dot b) `~==` 20.0)
     }
 
     @Test

@@ -12,11 +12,11 @@ class MaterialTest {
     fun `The default material`() {
         val m = material()
 
-        assert(m.color `~==` Color(1f, 1f, 1f))
-        assert(m.ambient == 0.1f)
-        assert(m.diffuse == 0.9f)
-        assert(m.specular == 0.9f)
-        assert(m.shininess == 200.0f)
+        assert(m.color `~==` Color(1.0, 1.0, 1.0))
+        assert(m.ambient == 0.1)
+        assert(m.diffuse == 0.9)
+        assert(m.specular == 0.9)
+        assert(m.shininess == 200.0)
     }
 
     @Test
@@ -26,11 +26,11 @@ class MaterialTest {
 
         val eye = vector(0, 0, -1)
         val normal = vector(0, 0, -1)
-        val light = PointLight(point(0, 0, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 0, -10), Color(1.0, 1.0, 1.0))
 
         val result = m.lighting(light, position, eye, normal)
 
-        assert(result `~==` Color(1.9f, 1.9f, 1.9f))
+        assert(result `~==` Color(1.9, 1.9, 1.9))
     }
 
     @Test
@@ -38,13 +38,13 @@ class MaterialTest {
         val m = material()
         val position = point(0, 0, 0)
 
-        val eye = vector(0f, sqrt(2f) / 2, -sqrt(2f) / 2)
+        val eye = vector(0.0, sqrt(2.0) / 2, -sqrt(2.0) / 2)
         val normal = vector(0, 0, -1)
-        val light = PointLight(point(0, 0, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 0, -10), Color(1.0, 1.0, 1.0))
 
         val result = m.lighting(light, position, eye, normal)
 
-        assert(result `~==` Color(1.0f, 1.0f, 1.0f))
+        assert(result `~==` Color(1.0, 1.0, 1.0))
     }
 
     @Test
@@ -54,11 +54,11 @@ class MaterialTest {
 
         val eye = vector(0, 0, -1)
         val normal = vector(0, 0, -1)
-        val light = PointLight(point(0, 10, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 10, -10), Color(1.0, 1.0, 1.0))
 
         val result = m.lighting(light, position, eye, normal)
 
-        assert(result `~==` Color(0.7364f, 0.7364f, 0.7364f))
+        assert(result `~==` Color(0.7364, 0.7364, 0.7364))
     }
 
     @Test
@@ -66,13 +66,13 @@ class MaterialTest {
         val m = material()
         val position = point(0, 0, 0)
 
-        val eye = vector(0f, -sqrt(2f) / 2, -sqrt(2f) / 2)
+        val eye = vector(0.0, -sqrt(2.0) / 2, -sqrt(2.0) / 2)
         val normal = vector(0, 0, -1)
-        val light = PointLight(point(0, 10, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 10, -10), Color(1.0, 1.0, 1.0))
 
         val result = m.lighting(light, position, eye, normal)
 
-        assert(result `~==` Color(1.63638f, 1.63638f, 1.63638f))
+        assert(result `~==` Color(1.63639, 1.63639, 1.63639))
     }
 
     @Test
@@ -82,11 +82,11 @@ class MaterialTest {
 
         val eye = vector(0, 0, -1)
         val normal = vector(0, 0, -1)
-        val light = PointLight(point(0, 0, 10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 0, 10), Color(1.0, 1.0, 1.0))
 
         val result = m.lighting(light, position, eye, normal, false)
 
-        assert(result `~==` Color(0.1f, 0.1f, 0.1f))
+        assert(result `~==` Color(0.1, 0.1, 0.1))
     }
 
     @Test
@@ -96,11 +96,11 @@ class MaterialTest {
 
         val eyev = vector(0, 0, -1)
         val normalv = vector(0, 0, -1)
-        val light = PointLight(point(0, 0, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(0, 0, -10), Color(1.0, 1.0, 1.0))
         val inShadow = true
 
         val result = m.lighting(light, position, eyev, normalv, inShadow)
 
-        assert(result `~==` Color(0.1f, 0.1f, 0.1f))
+        assert(result `~==` Color(0.1, 0.1, 0.1))
     }
 }

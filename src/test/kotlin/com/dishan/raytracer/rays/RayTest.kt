@@ -20,10 +20,10 @@ class RayTest {
     @Test
     fun `Computing a point from a distance`() {
         val ray = Ray(point(2, 3, 4), vector(1, 0, 0))
-        assert(ray.position(0f) `~==` point(2, 3, 4))
-        assert(ray.position(1f) `~==` point(3, 3, 4))
-        assert(ray.position(-1f) `~==` point(1, 3, 4))
-        assert(ray.position(2.5f) `~==` point(4.5f, 3f, 4f))
+        assert(ray.position(0.0) `~==` point(2, 3, 4))
+        assert(ray.position(1.0) `~==` point(3, 3, 4))
+        assert(ray.position(-1.0) `~==` point(1, 3, 4))
+        assert(ray.position(2.5) `~==` point(4.5, 3.0, 4.0))
     }
 
     @Test

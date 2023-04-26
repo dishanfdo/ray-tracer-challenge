@@ -13,20 +13,20 @@ import kotlin.math.PI
 fun main() {
 
     val world = world()
-    world.light = PointLight(point(-10, 10, -10), Color(1f, 1f, 1f))
+    world.light = PointLight(point(-10, 10, -10), Color(1.0, 1.0, 1.0))
 
     val floor = Sphere()
     floor.transform = identity()
-        .scale(10f, 0.01f, 10f)
+        .scale(10.0, 0.01, 10.0)
     floor.material = material(
-        color = Color(1f, 0.9f, 0.9f),
-        specular = 0f,
+        color = Color(1.0, 0.9, 0.9),
+        specular = 0.0,
     )
     world.add(floor)
 
     val leftWall = Sphere()
     leftWall.transform = identity()
-        .scale(10f, 0.01f, 10f)
+        .scale(10.0, 0.01, 10.0)
         .rotateX(PI / 2)
         .rotateY(-PI / 4)
         .translate(0, 0, 5)
@@ -35,7 +35,7 @@ fun main() {
 
     val rightWall = Sphere()
     rightWall.transform = identity()
-        .scale(10f, 0.01f, 10f)
+        .scale(10.0, 0.01, 10.0)
         .rotateX(PI / 2)
         .rotateY(PI / 4)
         .translate(0, 0, 5)
@@ -43,42 +43,42 @@ fun main() {
     world.add(rightWall)
 
     val middle = Sphere()
-    middle.transform = identity().translate(-0.5f, 1f, 0.5f)
+    middle.transform = identity().translate(-0.5, 1.0, 0.5)
     middle.material = material(
-        color = Color(0.1f, 1f, 0.5f),
-        diffuse = 0.7f,
-        specular = 0.3f,
+        color = Color(0.1, 1.0, 0.5),
+        diffuse = 0.7,
+        specular = 0.3,
     )
     world.add(middle)
 
     val right = Sphere()
     right.transform = identity()
-        .scale(0.5f, 0.5f, 0.5f)
-        .translate(1.5f, 0.5f, -0.5f)
+        .scale(0.5, 0.5, 0.5)
+        .translate(1.5, 0.5, -0.5)
     right.material = material(
-        color = Color(0.5f, 1f, 0.1f),
-        diffuse = 0.7f,
-        specular = 0.3f,
+        color = Color(0.5, 1.0, 0.1),
+        diffuse = 0.7,
+        specular = 0.3,
     )
     world.add(right)
 
     val left = Sphere()
     left.transform = identity()
-        .scale(0.33f, 0.33f, 0.33f)
-        .translate(-1.5f, 0.33f, -0.75f)
+        .scale(0.33, 0.33, 0.33)
+        .translate(-1.5, 0.33, -0.75)
     left.material = material(
-        color = Color(1f, 0.8f, 0.1f),
-        diffuse = 0.7f,
-        specular = 0.3f,
+        color = Color(1.0, 0.8, 0.1),
+        diffuse = 0.7,
+        specular = 0.3,
     )
     world.add(left)
 
     val camera = camera(
         hSize = 1000,
         vSize = 500,
-        fieldOfView = (PI / 3).toFloat(),
+        fieldOfView = PI / 3,
         transform = viewTransform(
-            from = point(x = 0f, y = 1.5f, z = -5f),
+            from = point(x = 0.0, y = 1.5, z = -5.0),
             to = point(0, 1, 0),
             up = vector(0, 1, 0)
         )

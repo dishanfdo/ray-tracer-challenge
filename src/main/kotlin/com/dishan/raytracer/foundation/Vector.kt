@@ -1,8 +1,9 @@
 package com.dishan.raytracer.foundation
 
+import com.dishan.raytracer.util.Num
 import kotlin.math.sqrt
 
-val Tuple.magnitude: Float
+val Tuple.magnitude: Num
     get() = sqrt(x * x + y * y + z * z + w * w)
 
 fun Tuple.normalized(): Tuple {
@@ -10,7 +11,7 @@ fun Tuple.normalized(): Tuple {
     return Tuple(x / m, y / m, z / m, w / m)
 }
 
-infix fun Tuple.dot(other: Tuple): Float {
+infix fun Tuple.dot(other: Tuple): Num {
     return x * other.x + y * other.y + z * other.z + w * other.w
 }
 

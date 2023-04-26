@@ -53,18 +53,18 @@ class TupleArithmeticTest {
     @Test
     fun `multiplying a tuple by a scalar`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a * 3.5f) `~==` tuple(3.5f, -7f, 10.5f, -14f))
+        assert((a * 3.5) `~==` tuple(3.5, -7.0, 10.5, -14.0))
     }
 
     @Test
     fun `multiplying a tuple by a fraction`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a * 0.5f) `~==` tuple(0.5f, -1f, 1.5f, -2f))
+        assert((a * 0.5) `~==` tuple(0.5, -1.0, 1.5, -2.0))
     }
 
     @Test
     fun `dividing a tuple by a scalar`() {
         val a = tuple(1, -2, 3, -4)
-        assert((a / 2f) `~==` tuple(0.5f, -1f, 1.5f, -2f))
+        assert((a / 2.0) `~==` tuple(0.5, -1.0, 1.5, -2.0))
     }
 }

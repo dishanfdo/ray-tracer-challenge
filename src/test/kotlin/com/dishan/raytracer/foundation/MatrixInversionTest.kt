@@ -9,50 +9,50 @@ class MatrixInversionTest {
     @Test
     fun `Testing an invertible matrix for invertibility`() {
         val a = Matrix4(
-            6f, 4f, 4f, 4f,
-            5f, 5f, 7f, 6f,
-            4f, -9f, 3f, -7f,
-            9f, 1f, 7f, -6f
+            6.0, 4.0, 4.0, 4.0,
+            5.0, 5.0, 7.0, 6.0,
+            4.0, -9.0, 3.0, -7.0,
+            9.0, 1.0, 7.0, -6.0
         )
 
-        assert(a.determinant `~==` -2120f)
+        assert(a.determinant `~==` -2120.0)
         assertTrue(a.isInvertible())
     }
 
     @Test
     fun `Testing a non-invertible matrix for invertibility`() {
         val a = Matrix4(
-            -4f, 2f, -2f, -3f,
-            9f, 6f, 2f, 6f,
-            0f, -5f, 1f, -5f,
-            0f, 0f, 0f, 0f,
+            -4.0, 2.0, -2.0, -3.0,
+            9.0, 6.0, 2.0, 6.0,
+            0.0, -5.0, 1.0, -5.0,
+            0.0, 0.0, 0.0, 0.0,
         )
 
-        assert(a.determinant `~==` 0f)
+        assert(a.determinant `~==` 0.0)
         assertFalse(a.isInvertible())
     }
 
     @Test
     fun `Calculating the inverse of a matrix`() {
         val a = Matrix4(
-            -5f, 2f, 6f, -8f,
-            1f, -5f, 1f, 8f,
-            7f, 7f, -6f, -7f,
-            1f, -3f, 7f, 4f,
+            -5.0, 2.0, 6.0, -8.0,
+            1.0, -5.0, 1.0, 8.0,
+            7.0, 7.0, -6.0, -7.0,
+            1.0, -3.0, 7.0, 4.0,
         )
 
         val b = a.inversed()
-        assert(a.determinant `~==` 532f)
-        assert(a.cofactor(2, 3) `~==` -160f)
-        assert(b[3, 2] `~==` -160 / 532f)
-        assert(a.cofactor(3, 2) `~==` 105f)
-        assert(b[2, 3] `~==` 105 / 532f)
+        assert(a.determinant `~==` 532.0)
+        assert(a.cofactor(2, 3) `~==` -160.0)
+        assert(b[3, 2] `~==` -160 / 532.0)
+        assert(a.cofactor(3, 2) `~==` 105.0)
+        assert(b[2, 3] `~==` 105 / 532.0)
 
         val expected = Matrix4(
-            0.21805f, 0.45113f, 0.24060f, -0.04511f,
-            -0.80827f, -1.45677f, -0.44361f, 0.52068f,
-            -0.07895f, -0.22368f, -0.05263f, 0.19737f,
-            -0.52256f, -0.81391f, -0.30075f, 0.30639f,
+            0.21805, 0.45113, 0.24060, -0.04511,
+            -0.80827, -1.45677, -0.44361, 0.52068,
+            -0.07895, -0.22368, -0.05263, 0.19737,
+            -0.52256, -0.81391, -0.30075, 0.30639,
         )
         assert(b `~==` expected)
     }
@@ -60,17 +60,17 @@ class MatrixInversionTest {
     @Test
     fun `Calculating the inverse of another matrix`() {
         val a = Matrix4(
-            8f, -5f, 9f, 2f,
-            7f, 5f, 6f, 1f,
-            -6f, 0f, 9f, 6f,
-            -3f, 0f, -9f, -4f,
+            8.0, -5.0, 9.0, 2.0,
+            7.0, 5.0, 6.0, 1.0,
+            -6.0, 0.0, 9.0, 6.0,
+            -3.0, 0.0, -9.0, -4.0,
         )
 
         val expected = Matrix4(
-            -0.15385f, -0.15385f, -0.28205f, -0.53846f,
-            -0.07692f, 0.12308f, 0.02564f, 0.03077f,
-            0.35897f, 0.35897f, 0.43590f, 0.92308f,
-            -0.69231f, -0.69231f, -0.76923f, -1.92308f,
+            -0.15385, -0.15385, -0.28205, -0.53846,
+            -0.07692, 0.12308, 0.02564, 0.03077,
+            0.35897, 0.35897, 0.43590, 0.92308,
+            -0.69231, -0.69231, -0.76923, -1.92308,
         )
         assert(a.inversed() `~==` expected)
     }
@@ -78,19 +78,19 @@ class MatrixInversionTest {
     @Test
     fun `Calculating the inverse of a third matrix`() {
         val a = Matrix4(
-            9f, 3f, 0f, 9f,
-            -5f, -2f, -6f, -3f,
-            -4f, 9f, 6f, 4f,
-            -7f, 6f, 6f, 2f,
+            9.0, 3.0, 0.0, 9.0,
+            -5.0, -2.0, -6.0, -3.0,
+            -4.0, 9.0, 6.0, 4.0,
+            -7.0, 6.0, 6.0, 2.0,
         )
 
         println(a.inversed())
 
         val expected = Matrix4(
-            -0.04074f, -0.07778f, 0.14444f, -0.22222f,
-            -0.07778f, 0.03333f, 0.36667f, -0.33333f,
-            -0.02901f, -0.14630f, -0.10926f, 0.12963f,
-            0.17778f, 0.06667f, -0.26667f, 0.33333f,
+            -0.04074, -0.07778, 0.14444, -0.22222,
+            -0.07778, 0.03333, 0.36667, -0.33333,
+            -0.02901, -0.14630, -0.10926, 0.12963,
+            0.17778, 0.06667, -0.26667, 0.33333,
         )
         assert(a.inversed() `~==` expected)
     }
@@ -98,17 +98,17 @@ class MatrixInversionTest {
     @Test
     fun `Multiplying a product by its inverse`() {
         val a = Matrix4(
-            3f, -9f, 7f, 3f,
-            3f, -8f, 2f, -9f,
-            -4f, 4f, 4f, 1f,
-            -6f, 5f, -1f, 1f,
+            3.0, -9.0, 7.0, 3.0,
+            3.0, -8.0, 2.0, -9.0,
+            -4.0, 4.0, 4.0, 1.0,
+            -6.0, 5.0, -1.0, 1.0,
         )
 
         val b = Matrix4(
-            8f, 2f, 2f, 2f,
-            3f, -1f, 7f, 0f,
-            7f, 0f, 5f, 4f,
-            6f, -2f, 0f, 5f,
+            8.0, 2.0, 2.0, 2.0,
+            3.0, -1.0, 7.0, 0.0,
+            7.0, 0.0, 5.0, 4.0,
+            6.0, -2.0, 0.0, 5.0,
         )
 
         assert(((a * b) * b.inversed()) `~==` a)

@@ -11,10 +11,10 @@ fun main() {
     println("Inverse of Identity == Identity? -> ${identity.inversed() `~==` identity}")
 
     val a = Matrix4(
-        1f, 2f, 7f, 4f,
-        5f, 3f, 7f, 8f,
-        4f, 5f, 8f, 7f,
-        6f, 1f, 8f, 9f,
+        1.0, 2.0, 7.0, 4.0,
+        5.0, 3.0, 7.0, 8.0,
+        4.0, 5.0, 8.0, 7.0,
+        6.0, 1.0, 8.0, 9.0,
     )
     println("A: ")
     println(a)

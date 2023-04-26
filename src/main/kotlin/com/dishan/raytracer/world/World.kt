@@ -58,16 +58,16 @@ class World(private val objects: MutableList<Object> = mutableListOf(), var ligh
 fun world(): World = World()
 
 fun defaultWorld(): World {
-    val light = PointLight(point(-10, 10, -10), Color(1f, 1f, 1f))
+    val light = PointLight(point(-10, 10, -10), Color(1.0, 1.0, 1.0))
     val s1 = Sphere().apply {
         material = material(
-            color = Color(0.8f, 1.0f, 0.6f),
-            diffuse = 0.7f,
-            specular = 0.2f,
+            color = Color(0.8, 1.0, 0.6),
+            diffuse = 0.7,
+            specular = 0.2,
         )
     }
     val s2 = Sphere().apply {
-        transform = identity().scale(0.5f, 0.5f, 0.5f)
+        transform = identity().scale(0.5, 0.5, 0.5)
     }
     return World(objects = mutableListOf(s1, s2), light = light)
 }

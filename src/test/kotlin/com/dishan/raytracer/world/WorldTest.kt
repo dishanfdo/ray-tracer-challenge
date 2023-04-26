@@ -19,16 +19,16 @@ class WorldTest {
 
     @Test
     fun `The default world`() {
-        val light = PointLight(point(-10, 10, -10), Color(1f, 1f, 1f))
+        val light = PointLight(point(-10, 10, -10), Color(1.0, 1.0, 1.0))
         val s1 = Sphere().apply {
             material = material(
-                color = Color(0.8f, 1.0f, 0.6f),
-                diffuse = 0.7f,
-                specular = 0.2f,
+                color = Color(0.8, 1.0, 0.6),
+                diffuse = 0.7,
+                specular = 0.2,
             )
         }
         val s2 = Sphere().apply {
-            transform = identity().scale(0.5f, 0.5f, 0.5f)
+            transform = identity().scale(0.5, 0.5, 0.5)
         }
 
         val w = defaultWorld()
@@ -46,10 +46,10 @@ class WorldTest {
         val xs = w.intersect(r)
 
         assert(xs.size == 4)
-        assert(xs[0].t `~==` 4.0f)
-        assert(xs[1].t `~==` 4.5f)
-        assert(xs[2].t `~==` 5.5f)
-        assert(xs[3].t `~==` 6.0f)
+        assert(xs[0].t `~==` 4.0)
+        assert(xs[1].t `~==` 4.5)
+        assert(xs[2].t `~==` 5.5)
+        assert(xs[3].t `~==` 6.0)
     }
 
     @Test
@@ -57,26 +57,26 @@ class WorldTest {
         val w = defaultWorld()
         val r = Ray(point(0, 0, -5), vector(0, 0, 1))
         val shape = w.first()
-        val i = Intersection(4.0f, shape)
+        val i = Intersection(4.0, shape)
 
         val comps = i.prepareComputation(r)
         val c = w.shadeHit(comps)
 
-        assert(c `~==` Color(0.38066f, 0.47583f, 0.2855f))
+        assert(c `~==` Color(0.38066, 0.47583, 0.2855))
     }
 
     @Test
     fun `Shading an intersection from the inside`() {
         val w = defaultWorld()
-        w.light = PointLight(point(0f, 0.25f, 0f), Color(1f, 1f, 1f))
+        w.light = PointLight(point(0.0, 0.25, 0.0), Color(1.0, 1.0, 1.0))
         val r = Ray(point(0, 0, 0), vector(0, 0, 1))
         val shape = w[1]
-        val i = Intersection(0.5f, shape)
+        val i = Intersection(0.5, shape)
 
         val comps = i.prepareComputation(r)
         val c = w.shadeHit(comps)
 
-        assert(c `~==` Color(0.90498f, 0.90498f, 0.90498f))
+        assert(c `~==` Color(0.90498, 0.90498, 0.90498))
     }
 
     @Test
@@ -85,7 +85,7 @@ class WorldTest {
         val r = Ray(point(0, 0, -5), vector(0, 1, 0))
 
         val c = w.colorAt(r)
-        assert(c `~==` Color(0f, 0f, 0f))
+        assert(c `~==` Color(0.0, 0.0, 0.0))
     }
 
     @Test
@@ -94,19 +94,19 @@ class WorldTest {
         val r = Ray(point(0, 0, -5), vector(0, 0, 1))
 
         val c = w.colorAt(r)
-        assert(c `~==` Color(0.38066f, 0.47583f, 0.2855f))
+        assert(c `~==` Color(0.38066, 0.47583, 0.2855))
     }
 
     @Test
     fun `The color with an intersection behind the ray`() {
         val w = defaultWorld()
         val outer = w[0]
-        outer.material = outer.material.copyWith(ambient = 1.0f)
+        outer.material = outer.material.copyWith(ambient = 1.0)
 
         val inner = w[1]
-        inner.material = inner.material.copyWith(ambient = 1.0f)
+        inner.material = inner.material.copyWith(ambient = 1.0)
 
-        val r = Ray(point(0f, 0f, 0.75f), vector(0, 0, -1))
+        val r = Ray(point(0.0, 0.0, 0.75), vector(0, 0, -1))
 
         val c = w.colorAt(r)
         assert(c `~==` inner.material.color)
@@ -147,7 +147,7 @@ class WorldTest {
     @Test
     fun `shadeHit() is given an intersection in shadow`() {
         val w = world()
-        w.light = PointLight(point(0, 0, -10), Color(1f, 1f, 1f))
+        w.light = PointLight(point(0, 0, -10), Color(1.0, 1.0, 1.0))
         val s1 = Sphere()
         w.add(s1)
 
@@ -156,11 +156,11 @@ class WorldTest {
         w.add(s2)
 
         val r = Ray(point(0, 0, 5), vector(0, 0, 1))
-        val i = Intersection(4f, s2)
+        val i = Intersection(4.0, s2)
         val comps = i.prepareComputation(r)
 
         val c = w.shadeHit(comps)
 
-        assert(c `~==` Color(0.1f, 0.1f, 0.1f))
+        assert(c `~==` Color(0.1, 0.1, 0.1))
     }
 }

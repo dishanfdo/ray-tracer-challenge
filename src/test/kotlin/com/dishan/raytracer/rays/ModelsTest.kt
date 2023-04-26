@@ -10,27 +10,27 @@ class ModelsTest {
     @Test
     fun `An intersection encapsulates t and object`() {
         val s = Sphere()
-        val i = Intersection(3.5f, s)
-        assert(i.t == 3.5f)
+        val i = Intersection(3.5, s)
+        assert(i.t == 3.5)
         assert(i.body == s)
     }
 
     @Test
     fun `Aggregating intersections`() {
         val s = Sphere()
-        val i1 = Intersection(1f, s)
-        val i2 = Intersection(2f, s)
+        val i1 = Intersection(1.0, s)
+        val i2 = Intersection(2.0, s)
         val xs = intersections(i1, i2)
         assert(xs.size == 2)
-        assert(xs[0].t == 1f)
-        assert(xs[1].t == 2f)
+        assert(xs[0].t == 1.0)
+        assert(xs[1].t == 2.0)
     }
 
     @Test
     fun `The hit, when all intersections have positive t`() {
         val s = Sphere()
-        val i1 = Intersection(1f, s)
-        val i2 = Intersection(2f, s)
+        val i1 = Intersection(1.0, s)
+        val i2 = Intersection(2.0, s)
         val xs = intersections(i2, i1)
 
         assert(xs.hit() == i1)
@@ -39,8 +39,8 @@ class ModelsTest {
     @Test
     fun `The hit, when some intersections have negative t`() {
         val s = Sphere()
-        val i1 = Intersection(-1f, s)
-        val i2 = Intersection(1f, s)
+        val i1 = Intersection(-1.0, s)
+        val i2 = Intersection(1.0, s)
         val xs = intersections(i2, i1)
 
         assert(xs.hit() == i2)
@@ -49,8 +49,8 @@ class ModelsTest {
     @Test
     fun `The hit, when all intersections have negative t`() {
         val s = Sphere()
-        val i1 = Intersection(-2f, s)
-        val i2 = Intersection(-1f, s)
+        val i1 = Intersection(-2.0, s)
+        val i2 = Intersection(-1.0, s)
         val xs = intersections(i2, i1)
 
         assertNull(xs.hit())
@@ -59,10 +59,10 @@ class ModelsTest {
     @Test
     fun `The hit is always the lowest non-negative intersection`() {
         val s = Sphere()
-        val i1 = Intersection(5f, s)
-        val i2 = Intersection(7f, s)
-        val i3 = Intersection(-3f, s)
-        val i4 = Intersection(2f, s)
+        val i1 = Intersection(5.0, s)
+        val i2 = Intersection(7.0, s)
+        val i3 = Intersection(-3.0, s)
+        val i4 = Intersection(2.0, s)
         val xs = intersections(i1, i2, i3, i4)
 
         assert(xs.hit() == i4)
@@ -72,7 +72,7 @@ class ModelsTest {
     fun `Precomputing the state of an intersection`() {
         val r = Ray(point(0, 0, -5), vector(0, 0, 1))
         val shape = Sphere()
-        val i = Intersection(4f, shape)
+        val i = Intersection(4.0, shape)
 
         val comps = i.prepareComputation(r)
 
@@ -86,7 +86,7 @@ class ModelsTest {
     fun `The hit, when an intersection occurs on the outside`() {
         val r = Ray(point(0, 0, -5), vector(0, 0, 1))
         val shape = Sphere()
-        val i = Intersection(4f, shape)
+        val i = Intersection(4.0, shape)
 
         val comps = i.prepareComputation(r)
 
@@ -97,7 +97,7 @@ class ModelsTest {
     fun `The hit, when an intersection occurs on the inside`() {
         val r = Ray(point(0, 0, 0), vector(0, 0, 1))
         val shape = Sphere()
-        val i = Intersection(1f, shape)
+        val i = Intersection(1.0, shape)
 
         val comps = i.prepareComputation(r)
 
@@ -114,7 +114,7 @@ class ModelsTest {
         val shape = Sphere()
         shape.transform = identity().translate(0, 0,1)
 
-        val i = Intersection(5f, shape)
+        val i = Intersection(5.0, shape)
 
         val comps = i.prepareComputation(r)
 

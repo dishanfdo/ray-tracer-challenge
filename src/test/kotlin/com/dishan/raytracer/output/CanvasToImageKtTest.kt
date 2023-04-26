@@ -20,9 +20,9 @@ class CanvasToImageKtTest {
     @Test
     fun `Constructing the PPM pixel data`() {
         val canvas = Canvas(5, 3)
-        val c1 = Color(1.5f, 0f, 0f)
-        val c2 = Color(0f, 0.5f, 0f)
-        val c3 = Color(-0.5f, 0f, 1f)
+        val c1 = Color(1.5, 0.0, 0.0)
+        val c2 = Color(0.0, 0.5, 0.0)
+        val c3 = Color(-0.5, 0.0, 1.0)
 
         canvas[0, 0] = c1
         canvas[2, 1] = c2
@@ -40,7 +40,7 @@ class CanvasToImageKtTest {
         val canvas = Canvas(10, 2)
         for (x in 0 until canvas.width) {
             for (y in 0 until canvas.height) {
-                canvas[x, y] = Color(1f, 0.8f, 0.6f)
+                canvas[x, y] = Color(1.0, 0.8, 0.6)
             }
         }
 

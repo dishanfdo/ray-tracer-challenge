@@ -1,13 +1,14 @@
 package com.dishan.raytracer.rays
 
 import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.util.Num
 import com.dishan.raytracer.world.World
 import kotlin.math.tan
 
-class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transform: Matrix4) {
-    val pixelSize: Float
-    val halfWidth: Float
-    val halfHeight: Float
+class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Num, val transform: Matrix4) {
+    val pixelSize: Num
+    val halfWidth: Num
+    val halfHeight: Num
 
     init {
         val halfView = tan(fieldOfView / 2)
@@ -37,7 +38,7 @@ class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transfo
         // using the camera matrix, transform the canvas point and the origin,
         // and then compute the ray's direction vector.
         // (remember that the canvas is at z=-1)
-        val pixel = transform.inversed() * point(worldX, worldY, -1f)
+        val pixel = transform.inversed() * point(worldX, worldY, -1.0)
         val origin = transform.inversed() * point(0, 0, 0)
         val direction = (pixel - origin).normalized()
 
@@ -59,6 +60,6 @@ class Camera(val hSize: Int, val vSize: Int, val fieldOfView: Float, val transfo
 
 }
 
-fun camera(hSize: Int, vSize: Int, fieldOfView: Float, transform: Matrix4 = identity()): Camera {
+fun camera(hSize: Int, vSize: Int, fieldOfView: Num, transform: Matrix4 = identity()): Camera {
     return Camera(hSize, vSize, fieldOfView, transform)
 }

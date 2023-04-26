@@ -62,7 +62,7 @@ class TransformationsKtTest {
         val p = point(0, 1, 0)
         val halfQuarter = rotationX(PI / 4)
         val fullQuarter = rotationX(PI / 2)
-        assert(halfQuarter * p `~==` point(0f, sqrt(2f) / 2, sqrt(2f) / 2))
+        assert(halfQuarter * p `~==` point(0.0, sqrt(2.0) / 2, sqrt(2.0) / 2))
         assert(fullQuarter * p `~==` point(0, 0, 1))
     }
 
@@ -71,7 +71,7 @@ class TransformationsKtTest {
         val p = point(0, 1, 0)
         val halfQuarter = rotationX(PI / 4)
         val inv = halfQuarter.inversed()
-        assert(inv * p `~==` point(0f, sqrt(2f) / 2, -sqrt(2f) / 2))
+        assert(inv * p `~==` point(0.0, sqrt(2.0) / 2, -sqrt(2.0) / 2))
     }
 
     @Test
@@ -79,7 +79,7 @@ class TransformationsKtTest {
         val p = point(0, 0, 1)
         val halfQuarter = rotationY(PI / 4)
         val fullQuarter = rotationY(PI / 2)
-        assert(halfQuarter * p `~==` point(sqrt(2f) / 2, 0f, sqrt(2f) / 2))
+        assert(halfQuarter * p `~==` point(sqrt(2.0) / 2, 0.0, sqrt(2.0) / 2))
         assert(fullQuarter * p `~==` point(1, 0, 0))
     }
 
@@ -88,7 +88,7 @@ class TransformationsKtTest {
         val p = point(0, 1, 0)
         val halfQuarter = rotationZ(PI / 4)
         val fullQuarter = rotationZ(PI / 2)
-        assert(halfQuarter * p `~==` point(-sqrt(2f) / 2, sqrt(2f) / 2, 0f))
+        assert(halfQuarter * p `~==` point(-sqrt(2.0) / 2, sqrt(2.0) / 2, 0.0))
         assert(fullQuarter * p `~==` point(-1, 0, 0))
     }
 
@@ -214,10 +214,10 @@ class TransformationsKtTest {
 
         val t = viewTransform(from, to, up)
         val result = Matrix4(
-            -0.50709f, +0.50709f, +0.67612f, -2.36643f,
-            +0.76772f, +0.60609f, +0.12122f, -2.82843f,
-            -0.35857f, +0.59761f, -0.71714f, +0.00000f,
-            +0.00000f, +0.00000f, +0.00000f, +1.00000f,
+            -0.50709, +0.50709, +0.67612, -2.36643,
+            +0.76772, +0.60609, +0.12122, -2.82843,
+            -0.35857, +0.59761, -0.71714, +0.00000,
+            +0.00000, +0.00000, +0.00000, +1.00000,
         )
 
         assert(t `~==` result)

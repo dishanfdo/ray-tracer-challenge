@@ -8,14 +8,14 @@ class TupleTest {
 
     @Test
     fun `tuple with w=1 is a point`() {
-        val tuple = Tuple(4.3f, -4.2f, 3.1f, 1.0f)
+        val tuple = Tuple(4.3, -4.2, 3.1, 1.0)
 
         assert(tuple.type == Point)
     }
 
     @Test
     fun `tuple with w=0 is a vector`() {
-        val tuple = Tuple(4.3f, -4.2f, 3.1f, 0.0f)
+        val tuple = Tuple(4.3, -4.2, 3.1, 0.0)
 
         assert(tuple.type == Vector)
     }
@@ -46,7 +46,7 @@ class TupleTest {
     @Test
     fun `Reflecting a vector off a slanted surface`() {
         val v = vector(0, -1, 0)
-        val n = vector(sqrt(2f) / 2, sqrt(2f) / 2, 0f)
+        val n = vector(sqrt(2.0) / 2, sqrt(2.0) / 2, 0.0)
         val r = v.reflect(n)
 
         assert(r `~==` vector(1, 0, 0))

@@ -9,14 +9,14 @@ import com.dishan.raytracer.samples.projectile.writeToFile
 
 fun main() {
     val rayOrigin = point(0, 0, -5)
-    val wallZ = 10f
-    val wallSize = 7.0f
+    val wallZ = 10.0
+    val wallSize = 7.0
     val canvasPixels = 100
     val pixelSize = wallSize / canvasPixels
     val half = wallSize / 2
 
     val canvas = Canvas(canvasPixels, canvasPixels)
-    val color = Color(1f, 0f, 0f)
+    val color = Color(1.0, 0.0, 0.0)
     val shape = Sphere()
     // shape.transform = shearing(1) * scaling(0.5f, 1f, 1f)
 

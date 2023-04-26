@@ -8,7 +8,7 @@ class PointLightTest {
 
     @Test
     fun `A point light has a position and intensity`() {
-        val intensity = Color(1f, 1f, 1f)
+        val intensity = Color(1.0, 1.0, 1.0)
         val position = point(0, 0, 0)
         val light = PointLight(position, intensity)
 

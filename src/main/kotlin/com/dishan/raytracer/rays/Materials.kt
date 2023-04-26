@@ -1,10 +1,11 @@
 package com.dishan.raytracer.rays
 
 import com.dishan.raytracer.foundation.*
+import com.dishan.raytracer.util.Num
 import com.dishan.raytracer.util.`~==`
 import kotlin.math.pow
 
-class Material(val color: Color, val ambient: Float, val diffuse: Float, val specular: Float, val shininess: Float) {
+class Material(val color: Color, val ambient: Num, val diffuse: Num, val specular: Num, val shininess: Num) {
     infix fun `~==`(other: Material): Boolean {
         return color `~==` other.color &&
                 ambient `~==` other.ambient &&
@@ -15,10 +16,10 @@ class Material(val color: Color, val ambient: Float, val diffuse: Float, val spe
 
     fun copyWith(
         color: Color? = null,
-        ambient: Float? = null,
-        diffuse: Float? = null,
-        specular: Float? = null,
-        shininess: Float? = null,
+        ambient: Num? = null,
+        diffuse: Num? = null,
+        specular: Num? = null,
+        shininess: Num? = null,
     ): Material {
         return Material(
             color = color ?: this.color,
@@ -31,11 +32,11 @@ class Material(val color: Color, val ambient: Float, val diffuse: Float, val spe
 }
 
 fun material(
-    color: Color = Color(1f, 1f, 1f),
-    ambient: Float = 0.1f,
-    diffuse: Float = 0.9f,
-    specular: Float = 0.9f,
-    shininess: Float = 200.0f
+    color: Color = Color(1.0, 1.0, 1.0),
+    ambient: Num = 0.1,
+    diffuse: Num = 0.9,
+    specular: Num = 0.9,
+    shininess: Num = 200.0
 ): Material = Material(
     color,
     ambient,

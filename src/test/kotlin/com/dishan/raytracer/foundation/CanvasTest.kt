@@ -18,7 +18,7 @@ class CanvasTest {
     @Test
     fun `Writing pixels to a canvas`() {
         val canvas = Canvas(10, 20)
-        val red = Color(1f, 0f, 0f)
+        val red = Color(1.0, 0.0, 0.0)
 
         canvas[2, 3] = red
 

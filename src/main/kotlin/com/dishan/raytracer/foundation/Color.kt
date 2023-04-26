@@ -1,11 +1,12 @@
 package com.dishan.raytracer.foundation
 
+import com.dishan.raytracer.util.Num
 import com.dishan.raytracer.util.`~==`
 
-class Color(val red: Float, val green: Float, val blue: Float) {
+class Color(val red: Num, val green: Num, val blue: Num) {
     companion object {
-        val Black = Color(0f, 0f, 0f)
-        val White = Color(1f, 1f, 1f)
+        val Black = Color(0.0, 0.0, 0.0)
+        val White = Color(1.0, 1.0, 1.0)
     }
 
     infix fun `~==`(other: Color): Boolean {
@@ -22,7 +23,7 @@ class Color(val red: Float, val green: Float, val blue: Float) {
         return Color(red - other.red, green - other.green, blue - other.blue)
     }
 
-    operator fun times(t: Float): Color {
+    operator fun times(t: Num): Color {
         return Color(red * t, green * t, blue * t)
     }
 

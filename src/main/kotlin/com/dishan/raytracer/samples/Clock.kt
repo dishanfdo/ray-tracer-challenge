@@ -8,7 +8,7 @@ import kotlin.math.PI
 fun main() {
     val canvasSize = 200
     val padding = 40
-    val clockRadius = (canvasSize - padding) / 2.0f
+    val clockRadius = (canvasSize - padding) / 2.0
 
     val canvas = Canvas(canvasSize, canvasSize)
     val p = point(0, 1, 0)

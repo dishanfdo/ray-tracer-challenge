@@ -16,8 +16,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0].t `~==` 4.0f)
-        assert(xs[1].t `~==` 6.0f)
+        assert(xs[0].t `~==` 4.0)
+        assert(xs[1].t `~==` 6.0)
     }
 
     @Test
@@ -26,8 +26,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0].t `~==` 5.0f)
-        assert(xs[1].t `~==` 5.0f)
+        assert(xs[0].t `~==` 5.0)
+        assert(xs[1].t `~==` 5.0)
     }
 
     @Test
@@ -44,8 +44,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0].t `~==` -1.0f)
-        assert(xs[1].t `~==` 1.0f)
+        assert(xs[0].t `~==` -1.0)
+        assert(xs[1].t `~==` 1.0)
     }
 
     @Test
@@ -54,8 +54,8 @@ class SphereTest {
         val sphere = Sphere()
         val xs = sphere.intersect(ray)
         assert(xs.size == 2)
-        assert(xs[0].t `~==` -6.0f)
-        assert(xs[1].t `~==` -4.0f)
+        assert(xs[0].t `~==` -6.0)
+        assert(xs[1].t `~==` -4.0)
     }
 
     @Test
@@ -91,8 +91,8 @@ class SphereTest {
 
         val xs = s.intersect(r)
         assert(xs.size == 2)
-        assert(xs[0].t `~==` 3.0f)
-        assert(xs[1].t `~==` 7.0f)
+        assert(xs[0].t `~==` 3.0)
+        assert(xs[1].t `~==` 7.0)
     }
 
     @Test
@@ -132,15 +132,15 @@ class SphereTest {
     @Test
     fun `The normal on a sphere at a non-axial point`() {
         val s = Sphere()
-        val n = s.normalAt(point(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+        val n = s.normalAt(point(sqrt(3.0) / 3, sqrt(3.0) / 3, sqrt(3.0) / 3))
 
-        assert(n `~==` vector(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+        assert(n `~==` vector(sqrt(3.0) / 3, sqrt(3.0) / 3, sqrt(3.0) / 3))
     }
 
     @Test
     fun `The normal is a normalized vector`() {
         val s = Sphere()
-        val n = s.normalAt(point(sqrt(3f) / 3, sqrt(3f) / 3, sqrt(3f) / 3))
+        val n = s.normalAt(point(sqrt(3.0) / 3, sqrt(3.0) / 3, sqrt(3.0) / 3))
 
         assert(n `~==` n.normalized())
     }
@@ -149,20 +149,20 @@ class SphereTest {
     fun `Computing the normal on a translated sphere`() {
         val s = Sphere()
         s.transform = translation(0, 1, 0)
-        val n = s.normalAt(point(0f, 1.70711f, -0.70711f))
+        val n = s.normalAt(point(0.0, 1.70711, -0.70711))
 
-        assert(n `~==` vector(0f, 0.70711f, -0.70711f))
+        assert(n `~==` vector(0.0, 0.70711, -0.70711))
     }
 
     @Test
     fun `Computing the normal on a transformed sphere`() {
         val s = Sphere()
-        val m = scaling(1f, 0.5f, 1f) * rotationZ(PI / 5)
+        val m = scaling(1.0, 0.5, 1.0) * rotationZ(PI / 5)
         s.transform = m
 
-        val n = s.normalAt(point(0f, sqrt(2f)/2, -sqrt(2f)/2))
+        val n = s.normalAt(point(0.0, sqrt(2.0)/2, -sqrt(2.0)/2))
 
-        assert(n `~==` vector(0f, 0.97014f, -0.24254f))
+        assert(n `~==` vector(0.0, 0.97014, -0.24254))
     }
 
     @Test
@@ -176,7 +176,7 @@ class SphereTest {
     @Test
     fun `A sphere may be assigned a material`() {
         val s = Sphere()
-        val m = material(ambient = 1f)
+        val m = material(ambient = 1.0)
         s.material = m
 
         assert(s.material `~==` m)
