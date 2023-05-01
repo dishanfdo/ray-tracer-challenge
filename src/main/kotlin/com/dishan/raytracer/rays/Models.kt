@@ -4,15 +4,7 @@ import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.util.EPSILON
 import com.dishan.raytracer.util.Num
 
-interface Object {
-    var material: Material
-    fun normalAt(point: Tuple): Tuple
-    fun intersect(ray: Ray): Intersections
-
-    infix fun `~==`(other: Object): Boolean
-}
-
-class Intersection(val t: Num, val body: Object) {
+class Intersection(val t: Num, val body: Shape) {
     fun prepareComputation(ray: Ray): Computation {
         val point = ray.position(t)
         val normalv = body.normalAt(point)
@@ -41,7 +33,7 @@ fun Intersections.hit(): Intersection? = filter { it.t >= 0 }.minByOrNull { it.t
 
 class Computation(
     val t: Num,
-    val body: Object,
+    val body: Shape,
     val point: Tuple,
     val overPoint: Tuple,
     val eyev: Tuple,

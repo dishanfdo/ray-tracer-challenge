@@ -3,22 +3,22 @@ package com.dishan.raytracer.world
 import com.dishan.raytracer.foundation.*
 import com.dishan.raytracer.rays.*
 
-class World(private val objects: MutableList<Object> = mutableListOf(), var light: Light? = null) {
+class World(private val shapes: MutableList<Shape> = mutableListOf(), var light: Light? = null) {
 
-    fun isEmpty(): Boolean = objects.isEmpty()
+    fun isEmpty(): Boolean = shapes.isEmpty()
 
-    operator fun contains(body: Object): Boolean = objects.any { it `~==` body }
+    operator fun contains(body: Shape): Boolean = shapes.any { it `~==` body }
 
-    operator fun get(i: Int): Object = objects[i]
+    operator fun get(i: Int): Shape = shapes[i]
 
-    fun first(): Object = objects.first()
+    fun first(): Shape = shapes.first()
 
-    fun add(body: Object) {
-        objects.add(body)
+    fun add(body: Shape) {
+        shapes.add(body)
     }
 
     fun intersect(ray: Ray): Intersections {
-        return objects
+        return shapes
             .map { body -> body.intersect(ray) }.flatten()
             .sortedBy { intersection -> intersection.t }
     }
@@ -69,5 +69,5 @@ fun defaultWorld(): World {
     val s2 = Sphere().apply {
         transform = identity().scale(0.5, 0.5, 0.5)
     }
-    return World(objects = mutableListOf(s1, s2), light = light)
+    return World(shapes = mutableListOf(s1, s2), light = light)
 }
